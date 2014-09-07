@@ -1,4 +1,5 @@
 // test push
+// test 2
 public class Cell {
 
 	private Boolean hiddenRoom;
