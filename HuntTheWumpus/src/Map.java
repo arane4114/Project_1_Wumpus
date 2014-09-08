@@ -80,6 +80,41 @@ public class Map {
 			}
 		}
 	}
+	
+	/*
+	 * Sets the location of a wumpus. Assumes that a valid wumpus location is passed.
+	 */
+	public void setWumpus(Point wumpusLocation){
+		this.wumpusLocation = wumpusLocation;
+		map[wumpusLocation.x][wumpusLocation.y].setWumpus(true);
+		if(wumpusLocation.x == 0){
+			map[9][wumpusLocation.y].setBlood(true);
+		}
+		else{
+			map[wumpusLocation.x - 1][wumpusLocation.y].setBlood(true);
+		}
+		
+		if(wumpusLocation.x == 9){
+			map[0][wumpusLocation.y].setBlood(true);
+		}
+		else{
+			map[wumpusLocation.x + 1][wumpusLocation.y].setBlood(true);
+		}
+		
+		if(wumpusLocation.y == 0){
+			map[wumpusLocation.x][9].setBlood(true);
+		}
+		else{
+			map[wumpusLocation.x][wumpusLocation.y - 1].setBlood(true);
+		}
+		
+		if(wumpusLocation.y == 9){
+			map[wumpusLocation.x][0].setBlood(true);;
+		}
+		else{
+			map[wumpusLocation.x][wumpusLocation.y + 1].setBlood(true);
+		}
+	}
 
 	public String toString(){
 		String toString = "";
