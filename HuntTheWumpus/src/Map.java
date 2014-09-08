@@ -21,7 +21,7 @@ public class Map {
 	}
 
 	public void generatePits() {
-		int numberOfPits = 3 + (int) (Math.random() * ((5 - 3) + 1)); // Generates
+		int numberOfPits = 3 +( (int) (Math.random() * ((5 - 3) + 1))); // Generates
 																		// a
 																		// number
 																		// between
@@ -35,7 +35,8 @@ public class Map {
 			Point possibleNewPoint = new Point(x, y);
 			Boolean occupied = false;
 			for (Point point : pitPoints) {
-				if (possibleNewPoint.equals(point)) {
+				if (possibleNewPoint.equals(point)
+						|| possibleNewPoint.equals(this.wumpusLocation)) {
 					occupied = true;
 					break;
 				}
@@ -82,6 +83,11 @@ public class Map {
 		}
 	}
 
+	public void generateWumpus() {
+		setWumpus(new Point((int) (Math.random() * ((9) + 1)),
+				(int) (Math.random() * ((9) + 1))));
+	}
+
 	/*
 	 * Sets the location of a wumpus. Assumes that a valid wumpus location is
 	 * passed.
@@ -123,16 +129,16 @@ public class Map {
 					toString += " [O]";
 				} else if (map[i][j].getHiddenRoom()) {
 					toString += " [X]";
+				} else if (map[i][j].getPit()) {
+					toString += " [P]";
+				} else if (map[i][j].getWumpus()) {
+					toString += " [W]";
 				} else if (map[i][j].getGoop()) {
 					toString += " [G]";
 				} else if (map[i][j].getBlood()) {
 					toString += " [B]";
 				} else if (map[i][j].getSlime()) {
 					toString += " [S]";
-				} else if (map[i][j].getPit()) {
-					toString += " [P]";
-				} else if (map[i][j].getWumpus()) {
-					toString += " [W]";
 				} else {
 					toString += " [ ]";
 				}
