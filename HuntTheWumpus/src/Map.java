@@ -94,30 +94,62 @@ public class Map {
 	 */
 	public void setWumpus(Point wumpusLocation) {
 		this.wumpusLocation = wumpusLocation;
+//		map[wumpusLocation.x][wumpusLocation.y].setWumpus(true);
+//		if (wumpusLocation.x == 0) {
+//			map[9][wumpusLocation.y].setBlood(true);
+//		} else {
+//			map[wumpusLocation.x - 1][wumpusLocation.y].setBlood(true);
+//		}
+//
+//		if (wumpusLocation.x == 9) {
+//			map[0][wumpusLocation.y].setBlood(true);
+//		} else {
+//			map[wumpusLocation.x + 1][wumpusLocation.y].setBlood(true);
+//		}
+//
+//		if (wumpusLocation.y == 0) {
+//			map[wumpusLocation.x][9].setBlood(true);
+//		} else {
+//			map[wumpusLocation.x][wumpusLocation.y - 1].setBlood(true);
+//		}
+//
+//		if (wumpusLocation.y == 9) {
+//			map[wumpusLocation.x][0].setBlood(true);
+//			;
+//		} else {
+//			map[wumpusLocation.x][wumpusLocation.y + 1].setBlood(true);
+//		}
+		
 		map[wumpusLocation.x][wumpusLocation.y].setWumpus(true);
-		if (wumpusLocation.x == 0) {
-			map[9][wumpusLocation.y].setBlood(true);
-		} else {
-			map[wumpusLocation.x - 1][wumpusLocation.y].setBlood(true);
-		}
-
-		if (wumpusLocation.x == 9) {
-			map[0][wumpusLocation.y].setBlood(true);
-		} else {
-			map[wumpusLocation.x + 1][wumpusLocation.y].setBlood(true);
-		}
-
-		if (wumpusLocation.y == 0) {
-			map[wumpusLocation.x][9].setBlood(true);
-		} else {
-			map[wumpusLocation.x][wumpusLocation.y - 1].setBlood(true);
-		}
-
-		if (wumpusLocation.y == 9) {
-			map[wumpusLocation.x][0].setBlood(true);
-			;
-		} else {
-			map[wumpusLocation.x][wumpusLocation.y + 1].setBlood(true);
+		
+		map[wumpusLocation.x][wrapAround(wumpusLocation.y - 1)].setBlood(true);
+		map[wumpusLocation.x][wrapAround(wumpusLocation.y - 2)].setBlood(true);
+		
+		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y - 1)].setBlood(true);
+		
+		map[wrapAround(wumpusLocation.x - 1)][wumpusLocation.y].setBlood(true);
+		map[wrapAround(wumpusLocation.x - 2)][wumpusLocation.y].setBlood(true);
+		
+		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y + 1)].setBlood(true);
+		
+		map[wumpusLocation.x][wrapAround(wumpusLocation.y + 1)].setBlood(true);
+		map[wumpusLocation.x][wrapAround(wumpusLocation.y + 2)].setBlood(true);
+		
+		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y + 1)].setBlood(true );
+		
+		map[wrapAround(wumpusLocation.x + 1)][wumpusLocation.y].setBlood(true);
+		map[wrapAround(wumpusLocation.x + 2)][wumpusLocation.y].setBlood(true);
+		
+		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y - 1)].setBlood(true);
+	}
+	
+	public int wrapAround(int i){
+		if(i < map.length && i > -1){
+			return i;
+		}else if(i > map.length - 1){
+			return i - map.length;
+		}else{
+			return i + map.length;
 		}
 	}
 
