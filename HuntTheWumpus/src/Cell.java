@@ -2,14 +2,14 @@
 // test 2
 public class Cell {
 
-	private Boolean hiddenRoom;
-	private Boolean slime;
-	private Boolean blood;
-	private Boolean pit;
-	private Boolean wumpus;
-	private Boolean hasHunter;
+	private boolean hiddenRoom;
+	private boolean slime;
+	private boolean blood;
+	private boolean pit;
+	private boolean wumpus;
+	private boolean hasHunter;
 	
-	public Cell(Boolean hiddenRoom, Boolean slime, Boolean blood, Boolean pit, Boolean wumpus) {
+	public Cell(boolean hiddenRoom, boolean slime, boolean blood, boolean pit, boolean wumpus) {
 		this.hiddenRoom = hiddenRoom;
 		this.slime = slime;
 		this.blood = blood;
@@ -19,59 +19,59 @@ public class Cell {
 		
 	}
 	
-	public Boolean getHiddenRoom(){
+	public boolean getHiddenRoom(){
 		return hiddenRoom;
 	}
 	
-	public Boolean getSlime(){
+	public boolean getSlime(){
 		return slime;
 	}
 	
-	public Boolean getBlood(){
+	public boolean getBlood(){
 		return blood;
 	}
 	
-	public Boolean getPit(){
+	public boolean getPit(){
 		return pit;
 	}
 	
-	public Boolean getNothing(){
+	public boolean getNothing(){
 		return !slime && !blood && !pit;
 	}
 	
-	public Boolean getWumpus(){
+	public boolean getWumpus(){
 		return wumpus;
 	}
 	
-	public Boolean getGoop(){
+	public boolean getGoop(){
 		return slime && blood;
 	}
 	
-	public void setHiddenRoom(Boolean hiddenRoom){
+	public void setHiddenRoom(boolean hiddenRoom){
 		this.hiddenRoom = hiddenRoom;
 	}
 	
-	public void setSlime(Boolean slime){
+	public void setSlime(boolean slime){
 		this.slime = slime;
 	}
 	
-	public void setBlood(Boolean blood){
+	public void setBlood(boolean blood){
 		this.blood = blood;
 	}
 	
-	public void setPit(Boolean pit){
+	public void setPit(boolean pit){
 		this.pit = pit;
 	}
 	
-	public void setWumpus(Boolean wumpus){
+	public void setWumpus(boolean wumpus){
 		this.wumpus = wumpus;
 	}
 	
-	public void setHasHunter(Boolean hasHunter){
+	public void setHasHunter(boolean hasHunter){
 		this.hasHunter = hasHunter;
 	}
 	
-	public Boolean getHasHunter(){
+	public boolean getHasHunter(){
 		return this.hasHunter;
 	}
 
