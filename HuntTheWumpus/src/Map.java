@@ -11,7 +11,7 @@ public class Map {
 		map = new Cell[10][10];
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				map[i][j] = new Cell(true, false, false, false, false);
+				map[i][j] = new Cell();n
 			}
 		}
 	}
