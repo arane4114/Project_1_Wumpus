@@ -2,48 +2,57 @@
 // test 2
 public class Cell {
 
-	private Boolean hiddenRoom;
-	private Boolean slime;
-	private Boolean blood;
-	private Boolean pit;
-	private Boolean wumpus; 
+	private boolean hiddenRoom;
+	private boolean slime;
+	private boolean blood;
+	private boolean pit;
+	private boolean wumpus; 
+	private boolean hunter;
 	
 	
-	public Cell(Boolean hiddenRoom, Boolean slime, Boolean blood, Boolean pit, Boolean wumpus) {
-		this.hiddenRoom = hiddenRoom;
-		this.slime = slime;
-		this.blood = blood;
-		this.pit = pit;
-		this.wumpus = wumpus;
-		
+//	public Cell(Boolean hiddenRoom, Boolean slime, Boolean blood, Boolean pit, Boolean wumpus) {
+//		this.hiddenRoom = hiddenRoom;
+//		this.slime = slime;
+//		this.blood = blood;
+//		this.pit = pit;
+//		this.wumpus = wumpus;
+//		
+//	}
+	
+	public Cell(){
+		this.hiddenRoom = true;
 	}
 	
-	public Boolean getHiddenRoom(){
+	public boolean getHiddenRoom(){
 		return hiddenRoom;
 	}
 	
-	public Boolean getSlime(){
+	public boolean getSlime(){
 		return slime;
 	}
 	
-	public Boolean getBlood(){
+	public boolean getBlood(){
 		return blood;
 	}
 	
-	public Boolean getPit(){
+	public boolean getPit(){
 		return pit;
 	}
 	
-	public Boolean getNothing(){
+	public boolean getNothing(){
 		return !slime && !blood && !pit;
 	}
 	
-	public Boolean getWumpus(){
+	public boolean getWumpus(){
 		return wumpus;
 	}
 	
-	public Boolean getGoop(){
+	public boolean getGoop(){
 		return slime && blood;
+	}
+	
+	public boolean getHunter(){
+		return hunter;
 	}
 	
 	public void setHiddenRoom(Boolean hiddenRoom){
@@ -67,13 +76,28 @@ public class Cell {
 	}
 
 	
+	public void setHunter(boolean hunter){
+		this.hunter = hunter;
+	}
 	
 	
 	
 	
 	
-	
-	
+	// Change to what you want it to say
+	public String whatsThere(){
+		String whatsThere;
+		if(getGoop()){
+			whatsThere = "Goop";
+		}else if(getBlood()){
+			whatsThere = "Blood";
+		}else if(getSlime()){
+			whatsThere = "Slime";
+		}else{
+			whatsThere = "Nothing";
+		}
+	return whatsThere;
+	}
 	
 	
 	
