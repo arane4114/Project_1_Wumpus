@@ -156,16 +156,16 @@ public class Map {
 			for (int j = 0; j < 10; j++) {
 				if (map[i][j].equals(hunter)) {
 					toString += " [O]";
+				} else if (map[i][j].getPit()) {
+					toString += " [P]";
+				} else if (map[i][j].getWumpus()) {
+					toString += " [W]";
 				} else if (map[i][j].getGoop()) {
 					toString += " [G]";
 				} else if (map[i][j].getBlood()) {
 					toString += " [B]";
 				} else if (map[i][j].getSlime()) {
 					toString += " [S]";
-				} else if (map[i][j].getPit()) {
-					toString += " [P]";
-				} else if (map[i][j].getWumpus()) {
-					toString += " [W]";
 				} else {
 					toString += " [ ]";
 				}
