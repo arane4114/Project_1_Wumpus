@@ -1,10 +1,86 @@
+import java.awt.Point;
+import java.util.ArrayList;
+
 
 public class Map {
 	
-	public Cell[][] map = new Cell[10][10];
+	private Cell[][] map;
 	private Cell hunter;
+	private Point wumpusLocation;
 	
+	public Map(){
+		map = new Cell[10][10];
+		for(int i = 0; i < 10; i++){
+			for(int j = 0; j < 10; j++){
+				map[i][j] = new Cell(true, false, false, false, false);
+			}
+		}
+	}
 	
+	public Cell getCell(Point point){
+		return map[point.x][point.y];
+	}
+	
+	public void generatePits(){
+		int numberOfPits = 3 + (int)(Math.random() * ((5 - 3) + 1)); // Generates a number between 3 and 5
+		ArrayList<Point> pitPoints = new ArrayList<Point>();
+		int i = 1;
+		while(i <= numberOfPits){
+			int x = (int)(Math.random() * ((9) + 1));
+			int y = (int)(Math.random() * ((9) + 1));
+			Point possibleNewPoint = new Point(x,y);
+			Boolean occupied = false;
+			for(Point point: pitPoints){
+				if(possibleNewPoint.equals(point)){
+					occupied = true;
+					break;
+				}
+			}
+			if(!occupied){
+				pitPoints.add(possibleNewPoint);
+				i++;
+			}
+		}
+		setPits(pitPoints);
+	}
+	
+	/*
+	 * Sets pits and goop with a set of known valid pit points locations. 
+	 * Allows for JUnit testing of a static map.
+	 */
+	public void setPits(ArrayList<Point> pitPoints) {
+		for(Point point: pitPoints){
+			map[point.x][point.y].setPit(true);
+			if(point.x == 0){
+				map[9][point.y].setSlime(true);
+			}
+			else{
+				map[point.x - 1][point.y].setSlime(true);
+			}
+			
+			if(point.x == 9){
+				map[0][point.y].setSlime(true);
+			}
+			else{
+				map[point.x + 1][point.y].setSlime(true);
+			}
+			
+			if(point.y == 0){
+				map[point.x][9].setSlime(true);
+			}
+			else{
+				map[point.x][point.y - 1].setSlime(true);;
+			}
+			
+			if(point.y == 9){
+				map[point.x][0].setSlime(true);
+			}
+			else{
+				map[point.x][point.y + 1].setSlime(true);
+			}
+		}
+	}
+
 	public String toString(){
 		String toString = "";
 		for(int i =  0; i < 10; i ++){

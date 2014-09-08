@@ -6,8 +6,8 @@ public class Cell {
 	private Boolean slime;
 	private Boolean blood;
 	private Boolean pit;
-	private Boolean wumpus; 
-	
+	private Boolean wumpus;
+	private Boolean hasHunter;
 	
 	public Cell(Boolean hiddenRoom, Boolean slime, Boolean blood, Boolean pit, Boolean wumpus) {
 		this.hiddenRoom = hiddenRoom;
@@ -15,6 +15,7 @@ public class Cell {
 		this.blood = blood;
 		this.pit = pit;
 		this.wumpus = wumpus;
+		this.hasHunter = false;
 		
 	}
 	
@@ -64,6 +65,14 @@ public class Cell {
 	
 	public void setWumpus(Boolean wumpus){
 		this.wumpus = wumpus;
+	}
+	
+	public void setHasHunter(Boolean hasHunter){
+		this.hasHunter = hasHunter;
+	}
+	
+	public Boolean getHasHunter(){
+		return this.hasHunter;
 	}
 
 	
