@@ -6,6 +6,7 @@ public class Map {
 	private Cell[][] map;
 	private Cell hunter;
 	private Point wumpusLocation;
+	private ArrayList<Point> invalidPoints;
 
 	public Map() {
 		map = new Cell[10][10];
@@ -14,19 +15,22 @@ public class Map {
 				map[i][j] = new Cell();
 			}
 		}
+		this.invalidPoints = new ArrayList<Point>();
+
 	}
 
+	/*
+	 * Returns a cell of the map given a point.
+	 */
 	public Cell getCell(Point point) {
 		return map[point.x][point.y];
 	}
 
+	/*
+	 * This method generates a set of pits that do not lie on any invalid point.
+	 */
 	public void generatePits() {
-		int numberOfPits = 3 +( (int) (Math.random() * ((5 - 3) + 1))); // Generates
-																		// a
-																		// number
-																		// between
-																		// 3 and
-																		// 5
+		int numberOfPits = 3 + ((int) (Math.random() * ((5 - 3) + 1))); 
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		int i = 1;
 		while (i <= numberOfPits) {
@@ -34,15 +38,15 @@ public class Map {
 			int y = (int) (Math.random() * ((9) + 1));
 			Point possibleNewPoint = new Point(x, y);
 			Boolean occupied = false;
-			for (Point point : pitPoints) {
-				if (possibleNewPoint.equals(point)
-						|| possibleNewPoint.equals(this.wumpusLocation)) {
+			for (Point point : this.invalidPoints) {
+				if (point.equals(possibleNewPoint)) {
 					occupied = true;
 					break;
 				}
 			}
 			if (!occupied) {
 				pitPoints.add(possibleNewPoint);
+				invalidPoints.add(possibleNewPoint);
 				i++;
 			}
 		}
@@ -94,63 +98,61 @@ public class Map {
 	 */
 	public void setWumpus(Point wumpusLocation) {
 		this.wumpusLocation = wumpusLocation;
-//		map[wumpusLocation.x][wumpusLocation.y].setWumpus(true);
-//		if (wumpusLocation.x == 0) {
-//			map[9][wumpusLocation.y].setBlood(true);
-//		} else {
-//			map[wumpusLocation.x - 1][wumpusLocation.y].setBlood(true);
-//		}
-//
-//		if (wumpusLocation.x == 9) {
-//			map[0][wumpusLocation.y].setBlood(true);
-//		} else {
-//			map[wumpusLocation.x + 1][wumpusLocation.y].setBlood(true);
-//		}
-//
-//		if (wumpusLocation.y == 0) {
-//			map[wumpusLocation.x][9].setBlood(true);
-//		} else {
-//			map[wumpusLocation.x][wumpusLocation.y - 1].setBlood(true);
-//		}
-//
-//		if (wumpusLocation.y == 9) {
-//			map[wumpusLocation.x][0].setBlood(true);
-//			;
-//		} else {
-//			map[wumpusLocation.x][wumpusLocation.y + 1].setBlood(true);
-//		}
-		
 		map[wumpusLocation.x][wumpusLocation.y].setWumpus(true);
-		
+
 		map[wumpusLocation.x][wrapAround(wumpusLocation.y - 1)].setBlood(true);
 		map[wumpusLocation.x][wrapAround(wumpusLocation.y - 2)].setBlood(true);
-		
-		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y - 1)].setBlood(true);
-		
+		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y - 1)]
+				.setBlood(true);
 		map[wrapAround(wumpusLocation.x - 1)][wumpusLocation.y].setBlood(true);
 		map[wrapAround(wumpusLocation.x - 2)][wumpusLocation.y].setBlood(true);
-		
-		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y + 1)].setBlood(true);
-		
+		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y + 1)]
+				.setBlood(true);
 		map[wumpusLocation.x][wrapAround(wumpusLocation.y + 1)].setBlood(true);
 		map[wumpusLocation.x][wrapAround(wumpusLocation.y + 2)].setBlood(true);
-		
-		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y + 1)].setBlood(true );
-		
+		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y + 1)]
+				.setBlood(true);
 		map[wrapAround(wumpusLocation.x + 1)][wumpusLocation.y].setBlood(true);
 		map[wrapAround(wumpusLocation.x + 2)][wumpusLocation.y].setBlood(true);
-		
-		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y - 1)].setBlood(true);
+		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y - 1)]
+				.setBlood(true);
+
+		invalidPoints.add(new Point(wumpusLocation.x,
+				wrapAround(wumpusLocation.y - 1)));
+		invalidPoints.add(new Point(wumpusLocation.x,
+				wrapAround(wumpusLocation.y - 2)));
+		invalidPoints.add(new Point(wrapAround(wumpusLocation.x - 1),
+				wrapAround(wumpusLocation.y - 1)));
+		invalidPoints.add(new Point(wrapAround(wumpusLocation.x - 1),
+				wumpusLocation.y));
+		invalidPoints.add(new Point(wrapAround(wumpusLocation.x - 2),
+				wumpusLocation.y));
+		invalidPoints.add(new Point(wrapAround(wumpusLocation.x - 1),
+				wrapAround(wumpusLocation.y + 1)));
+		invalidPoints.add(new Point(wumpusLocation.x,
+				wrapAround(wumpusLocation.y + 1)));
+		invalidPoints.add(new Point(wumpusLocation.x,
+				wrapAround(wumpusLocation.y + 2)));
+		invalidPoints.add(new Point(wrapAround(wumpusLocation.x + 1),
+				wrapAround(wumpusLocation.y + 1)));
+		invalidPoints.add(new Point(wrapAround(wumpusLocation.x + 1),
+				wumpusLocation.y));
+		invalidPoints.add(new Point(wrapAround(wumpusLocation.x + 2),
+				wumpusLocation.y));
+		invalidPoints.add(new Point(wrapAround(wumpusLocation.x + 1),
+				wrapAround(wumpusLocation.y - 1)));
+		invalidPoints.add(wumpusLocation);
 	}
-	
-	public int wrapAround(int i){
-		if(i < map.length && i > -1){
+
+	public int wrapAround(int i) {
+		if (i < map.length && i > -1) {
 			return i;
-		}else if(i > map.length - 1){
+		} else if (i > map.length - 1) {
 			return i - map.length;
-		}else{
+		} else {
 			return i + map.length;
 		}
+
 	}
 
 	public String toString() {
