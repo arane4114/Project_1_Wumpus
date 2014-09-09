@@ -144,7 +144,10 @@ public class Map {
 		invalidPoints.add(wumpusLocation);
 	}
 
-	public int wrapAround(int i) {
+	/*
+	 * This encapsulates the wraparound logic needed by the set wumpus method.
+	 */
+	private int wrapAround(int i) {
 		if (i < map.length && i > -1) {
 			return i;
 		} else if (i > map.length - 1) {
@@ -154,7 +157,10 @@ public class Map {
 		}
 
 	}
-
+	
+	/*
+	 * This creates the textual representation of the map that version one uses.
+	 */
 	public String toString() {
 		String toString = "";
 		for (int i = 0; i < 10; i++) {
@@ -183,7 +189,9 @@ public class Map {
 		}
 		return toString;
 	}
-
+	/*
+	 * This shows the textual representation as if all rooms were not hidden. This helps the debugging process.
+	 */
 	public String toStringDebug() {
 		String toString = "";
 		for (int i = 0; i < 10; i++) {
