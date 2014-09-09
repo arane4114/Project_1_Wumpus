@@ -39,8 +39,8 @@ public class Cell {
 		return pit;
 	}
 
-	public boolean getNothing() {
-		return !slime && !blood && !pit;
+	public boolean getIsEmpty() {
+		return !slime && !blood && !pit && !wumpus;
 	}
 
 	public boolean getWumpus() {

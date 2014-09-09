@@ -10,9 +10,10 @@ public class Map {
 
 	private Cell[][] map;
 	private Point wumpusLocation;
-	private Point hunterLocation;												
+	private Point hunterLocation;
 	private ArrayList<Point> invalidPoints;
-	
+	private boolean alive;
+
 	public Map() {
 		map = new Cell[10][10];
 		for (int i = 0; i < 10; i++) {
@@ -21,21 +22,21 @@ public class Map {
 			}
 		}
 		this.invalidPoints = new ArrayList<Point>();
-
+		this.alive = true;
 	}
-	
+
 	/*
 	 * Returns a cell of the map given a point.
 	 */
 	public Cell getCell(Point point) {
-		return map[point.x][point.y];
+		return map[point.y][point.x];
 	}
-	
+
 	/*
 	 * This method generates a set of pits that do not lie on any invalid point.
 	 */
 	public void generatePits() {
-		int numberOfPits = 3 + ((int) (Math.random() * ((5 - 3) + 1))); 
+		int numberOfPits = 3 + ((int) (Math.random() * ((5 - 3) + 1)));
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		int i = 1;
 		while (i <= numberOfPits) {
@@ -148,7 +149,7 @@ public class Map {
 				wrapAround(wumpusLocation.y - 1)));
 		invalidPoints.add(wumpusLocation);
 	}
-	
+
 	/*
 	 * This encapsulates the wraparound logic needed by the set wumpus method.
 	 */
@@ -162,16 +163,16 @@ public class Map {
 		}
 
 	}
-	
-	
-	public void generateHunter(){																					
+
+	public void generateHunter() {
 		Random rand = new Random();
 		boolean hunterPlaced = false;
 
-		while(!hunterPlaced){
+		while (!hunterPlaced) {
 			int i = rand.nextInt(map.length);
 			int j = rand.nextInt(map.length);
-			if(!map[i][j].getWumpus() && !map[i][j].getPit() && !map[i][j].getSlime() && !map[i][j].getBlood()){	
+			if (!map[i][j].getWumpus() && !map[i][j].getPit()
+					&& !map[i][j].getSlime() && !map[i][j].getBlood()) {
 				this.hunterLocation = (new Point(j, i));
 				map[i][j].setHiddenRoom(false);
 				map[i][j].setHunter(true);
@@ -179,53 +180,97 @@ public class Map {
 			}
 		}
 	}
-	
-	public void setHunter(Point hunt){																						
+
+	public void setHunter(Point hunt) {
 		int x = (int) hunt.getX();
 		int y = (int) hunt.getY();
 		map[hunterLocation.y][hunterLocation.x].setHunter(false);
 		this.hunterLocation = (new Point(x, y));
 		map[y][x].setHunter(true);
 	}
-	
-	public boolean shootArrow(char x){																				
-		if(x == 'A' || x == 'D'){
-			if(hunterLocation.y == wumpusLocation.y){
+
+	public boolean shootArrow(char x) {
+		alive = false;
+		if (x == 'A' || x == 'D') {
+			if (hunterLocation.y == wumpusLocation.y) {
 				return true;
 			}
-		}else if(x == 'W' || x == 'S'){
-			if(hunterLocation.x == wumpusLocation.x){
+		} else if (x == 'W' || x == 'S') {
+			if (hunterLocation.x == wumpusLocation.x) {
 				return true;
 			}
 		}
-	return false;
+		return false;
 	}
-	
-	public void hunterMove(char x){																					
-		if(x == 'w'){
+
+	public void hunterMove(char x) {
+		if (x == 'w') {
 			map[hunterLocation.y][hunterLocation.x].setHunter(false);
-			hunterLocation.move(hunterLocation.x, wrapAround(hunterLocation.y - 1));
+			map[hunterLocation.y][hunterLocation.x].setHiddenRoom(false);
+			hunterLocation.move(hunterLocation.x,
+					wrapAround(hunterLocation.y - 1));
 			map[hunterLocation.y][hunterLocation.x].setHunter(true);
-		}else if(x == 's'){
+		} else if (x == 's') {
 			map[hunterLocation.y][hunterLocation.y].setHunter(false);
-			hunterLocation.move(hunterLocation.x, wrapAround(hunterLocation.y + 1));
+			map[hunterLocation.y][hunterLocation.x].setHiddenRoom(false);
+			hunterLocation.move(hunterLocation.x,
+					wrapAround(hunterLocation.y + 1));
 			map[hunterLocation.y][hunterLocation.x].setHunter(true);
-		}else if(x == 'd'){
+		} else if (x == 'd') {
 			map[hunterLocation.y][hunterLocation.x].setHunter(false);
-			hunterLocation.move(wrapAround(hunterLocation.x + 1), hunterLocation.y);
+			map[hunterLocation.y][hunterLocation.x].setHiddenRoom(false);
+			hunterLocation.move(wrapAround(hunterLocation.x + 1),
+					hunterLocation.y);
 			map[hunterLocation.y][hunterLocation.x].setHunter(true);
-		}else if(x == 'a'){
+		} else if (x == 'a') {
 			map[hunterLocation.y][hunterLocation.x].setHunter(false);
-			hunterLocation.move(wrapAround(hunterLocation.x - 1), hunterLocation.y);
+			map[hunterLocation.y][hunterLocation.x].setHiddenRoom(false);
+			hunterLocation.move(wrapAround(hunterLocation.x - 1),
+					hunterLocation.y);
 			map[hunterLocation.y][hunterLocation.x].setHunter(true);
 		}
 	}
-	
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void die() {
+		this.alive = false;
+	}
+
+	public String getCurrentState() {
+		if (getCell(hunterLocation).getGoop()) {
+			return "Eww. You walked onto a reddish green mix of blood and slime. It looks like goop.";
+		}
+		if (getCell(hunterLocation).getBlood()) {
+			return "Your feet slip a bit. You look down and see the floor covered in blood.";
+		}
+		if (getCell(hunterLocation).getSlime()) {
+			return "Your shoes are now covered in some sort of slime";
+		}
+		if (getCell(hunterLocation).getPit()) {
+			alive = false;
+			return "You loose you footing and fall into a bottemless pit\n"
+					+ "GAME OVER";
+		}
+		if(getCell(hunterLocation).getWumpus()){
+			alive = false;
+			return "You walk into the wumpus. Dinner is serverd.\n"
+					+ "For the wumpus\n"
+					+ "GAME OVER";
+		}
+		if(getCell(hunterLocation).getIsEmpty()){
+			return "You look around all you see is nothing. The silence is deafaning";
+		}
+		return "";
+	}
+
 	public String toString() {
 		String toString = "";
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (i == hunterLocation.y && j == hunterLocation.x) {													
+				if (i == hunterLocation.y && j == hunterLocation.x) {
 					toString += " [O]";
 				} else if (map[i][j].getHiddenRoom()) {
 					toString += " [X]";
@@ -254,7 +299,7 @@ public class Map {
 		String toString = "";
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (i == hunterLocation.y && j == hunterLocation.x) {													
+				if (i == hunterLocation.y && j == hunterLocation.x) {
 					toString += " [O]";
 				} else if (map[i][j].getPit()) {
 					toString += " [P]";
