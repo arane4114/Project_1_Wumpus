@@ -1,6 +1,7 @@
-import java.awt.Point;
-
-// test pull
+/*
+ * @ - Author: Abhishek Rane
+ * @ - Author: Bryce Hammond
+ */
 public class GameRunner {
 	private Map gameMap;
 	/*
@@ -11,8 +12,6 @@ public class GameRunner {
 		gameMap.generateWumpus();
 		gameMap.generatePits();
 		gameMap.generateHunter();
-		// gameMap.setHunter(new Point(4, 4));
-		System.out.println(gameMap.shootArrow('W'));
 	}
 	
 	/*

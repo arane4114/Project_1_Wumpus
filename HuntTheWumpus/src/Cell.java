@@ -1,5 +1,7 @@
-// test push
-// test 2
+/*
+ * @ - Author: Abhishek Rane
+ * @ - Author: Bryce Hammond
+ */
 public class Cell {
 
 	private boolean hiddenRoom;
