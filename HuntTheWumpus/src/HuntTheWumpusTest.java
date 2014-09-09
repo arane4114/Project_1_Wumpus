@@ -20,6 +20,7 @@ public class HuntTheWumpusTest {
 		assertTrue(map.getCell(new Point(3,2)).getSlime());
 		assertTrue(map.getCell(new Point(2,1)).getSlime());
 		assertTrue(map.getCell(new Point(2,3)).getSlime());
+		map.setWumpus(new Point(0,0));
 		System.out.println(map.toStringDebug());
 	}
 }

@@ -11,7 +11,7 @@ public class Map {
 		map = new Cell[10][10];
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				map[i][j] = new Cell(true, false, false, false, false);
+				map[i][j] = new Cell();
 			}
 		}
 	}
@@ -21,7 +21,7 @@ public class Map {
 	}
 
 	public void generatePits() {
-		int numberOfPits = 3 + (int) (Math.random() * ((5 - 3) + 1)); // Generates
+		int numberOfPits = 3 +( (int) (Math.random() * ((5 - 3) + 1))); // Generates
 																		// a
 																		// number
 																		// between
@@ -35,7 +35,8 @@ public class Map {
 			Point possibleNewPoint = new Point(x, y);
 			Boolean occupied = false;
 			for (Point point : pitPoints) {
-				if (possibleNewPoint.equals(point)) {
+				if (possibleNewPoint.equals(point)
+						|| possibleNewPoint.equals(this.wumpusLocation)) {
 					occupied = true;
 					break;
 				}
@@ -82,36 +83,73 @@ public class Map {
 		}
 	}
 
+	public void generateWumpus() {
+		setWumpus(new Point((int) (Math.random() * ((9) + 1)),
+				(int) (Math.random() * ((9) + 1))));
+	}
+
 	/*
 	 * Sets the location of a wumpus. Assumes that a valid wumpus location is
 	 * passed.
 	 */
 	public void setWumpus(Point wumpusLocation) {
 		this.wumpusLocation = wumpusLocation;
+//		map[wumpusLocation.x][wumpusLocation.y].setWumpus(true);
+//		if (wumpusLocation.x == 0) {
+//			map[9][wumpusLocation.y].setBlood(true);
+//		} else {
+//			map[wumpusLocation.x - 1][wumpusLocation.y].setBlood(true);
+//		}
+//
+//		if (wumpusLocation.x == 9) {
+//			map[0][wumpusLocation.y].setBlood(true);
+//		} else {
+//			map[wumpusLocation.x + 1][wumpusLocation.y].setBlood(true);
+//		}
+//
+//		if (wumpusLocation.y == 0) {
+//			map[wumpusLocation.x][9].setBlood(true);
+//		} else {
+//			map[wumpusLocation.x][wumpusLocation.y - 1].setBlood(true);
+//		}
+//
+//		if (wumpusLocation.y == 9) {
+//			map[wumpusLocation.x][0].setBlood(true);
+//			;
+//		} else {
+//			map[wumpusLocation.x][wumpusLocation.y + 1].setBlood(true);
+//		}
+		
 		map[wumpusLocation.x][wumpusLocation.y].setWumpus(true);
-		if (wumpusLocation.x == 0) {
-			map[9][wumpusLocation.y].setBlood(true);
-		} else {
-			map[wumpusLocation.x - 1][wumpusLocation.y].setBlood(true);
-		}
-
-		if (wumpusLocation.x == 9) {
-			map[0][wumpusLocation.y].setBlood(true);
-		} else {
-			map[wumpusLocation.x + 1][wumpusLocation.y].setBlood(true);
-		}
-
-		if (wumpusLocation.y == 0) {
-			map[wumpusLocation.x][9].setBlood(true);
-		} else {
-			map[wumpusLocation.x][wumpusLocation.y - 1].setBlood(true);
-		}
-
-		if (wumpusLocation.y == 9) {
-			map[wumpusLocation.x][0].setBlood(true);
-			;
-		} else {
-			map[wumpusLocation.x][wumpusLocation.y + 1].setBlood(true);
+		
+		map[wumpusLocation.x][wrapAround(wumpusLocation.y - 1)].setBlood(true);
+		map[wumpusLocation.x][wrapAround(wumpusLocation.y - 2)].setBlood(true);
+		
+		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y - 1)].setBlood(true);
+		
+		map[wrapAround(wumpusLocation.x - 1)][wumpusLocation.y].setBlood(true);
+		map[wrapAround(wumpusLocation.x - 2)][wumpusLocation.y].setBlood(true);
+		
+		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y + 1)].setBlood(true);
+		
+		map[wumpusLocation.x][wrapAround(wumpusLocation.y + 1)].setBlood(true);
+		map[wumpusLocation.x][wrapAround(wumpusLocation.y + 2)].setBlood(true);
+		
+		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y + 1)].setBlood(true );
+		
+		map[wrapAround(wumpusLocation.x + 1)][wumpusLocation.y].setBlood(true);
+		map[wrapAround(wumpusLocation.x + 2)][wumpusLocation.y].setBlood(true);
+		
+		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y - 1)].setBlood(true);
+	}
+	
+	public int wrapAround(int i){
+		if(i < map.length && i > -1){
+			return i;
+		}else if(i > map.length - 1){
+			return i - map.length;
+		}else{
+			return i + map.length;
 		}
 	}
 
@@ -123,16 +161,16 @@ public class Map {
 					toString += " [O]";
 				} else if (map[i][j].getHiddenRoom()) {
 					toString += " [X]";
+				} else if (map[i][j].getPit()) {
+					toString += " [P]";
+				} else if (map[i][j].getWumpus()) {
+					toString += " [W]";
 				} else if (map[i][j].getGoop()) {
 					toString += " [G]";
 				} else if (map[i][j].getBlood()) {
 					toString += " [B]";
 				} else if (map[i][j].getSlime()) {
 					toString += " [S]";
-				} else if (map[i][j].getPit()) {
-					toString += " [P]";
-				} else if (map[i][j].getWumpus()) {
-					toString += " [W]";
 				} else {
 					toString += " [ ]";
 				}
@@ -150,16 +188,16 @@ public class Map {
 			for (int j = 0; j < 10; j++) {
 				if (map[i][j].equals(hunter)) {
 					toString += " [O]";
+				} else if (map[i][j].getPit()) {
+					toString += " [P]";
+				} else if (map[i][j].getWumpus()) {
+					toString += " [W]";
 				} else if (map[i][j].getGoop()) {
 					toString += " [G]";
 				} else if (map[i][j].getBlood()) {
 					toString += " [B]";
 				} else if (map[i][j].getSlime()) {
 					toString += " [S]";
-				} else if (map[i][j].getPit()) {
-					toString += " [P]";
-				} else if (map[i][j].getWumpus()) {
-					toString += " [W]";
 				} else {
 					toString += " [ ]";
 				}
