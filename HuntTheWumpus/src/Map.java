@@ -1,151 +1,212 @@
-import java.util.Random;
-
+import java.awt.Point;
+import java.util.ArrayList;
 
 public class Map {
-	
-	public Cell[][] map = new Cell[10][10];
-	//public Hunter hunter;
-	
-	public Map(){
-		createMap();
-		//Hunter hunter = new Hunter();			
-	}
-	
-	public String toString(){
-		String toString = "";
-		for(int i =  0; i < map.length; i ++){
-			for(int j = 0; j < map[i].length; j ++){
-				if(map[i][j].getHunter()){				//// -------
-					toString += " [O]";
-				}else if(map[i][j].getHiddenRoom()){
-					toString += " [X]";
-				}else if(map[i][j].getGoop()){
-					toString += " [G]";
-				}else if(map[i][j].getBlood()){
-					toString += " [B]";
-				}else if(map[i][j].getSlime()){
-					toString += " [S]";
-				}else if(map[i][j].getPit()){
-					toString += " [P]";
-				}else if(map[i][j].getWumpus()){
-					toString += " [W]";
-				}else{
-					toString += " [ ]";
-				}
-			}
-			if(i != map.length - 1){
-				toString += "\n";
-			}
-		}
-	return toString;
-	}
-	
-	// Need to place Hunter
-	public void createMap(){
-		
-		for(int i = 0; i < map.length; i ++){
-			for(int j = 0; j < map[i].length; j ++){
+
+	private Cell[][] map;
+	private Cell hunter;
+	private Point wumpusLocation;
+
+	public Map() {
+		map = new Cell[10][10];
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
 				map[i][j] = new Cell();
 			}
-		}													
-		
-		Random rand = new Random();
-		int pits = rand.nextInt(3) + 3;
-		int pitsPlaced = 0;
-		boolean hunterPlaced = false;
-		
-		setWumpus(rand.nextInt(map.length), rand.nextInt(map.length));
-		
-		while(pits != pitsPlaced){
-			int i = rand.nextInt(map.length);
-			int j = rand.nextInt(map.length);
-			if(!map[i][j].getWumpus() && !map[i][j].getPit()){
-				setPit(i, j);
+		}
+	}
+
+	public Cell getCell(Point point) {
+		return map[point.x][point.y];
+	}
+
+	public void generatePits() {
+		int numberOfPits = 3 +( (int) (Math.random() * ((5 - 3) + 1))); // Generates
+																		// a
+																		// number
+																		// between
+																		// 3 and
+																		// 5
+		ArrayList<Point> pitPoints = new ArrayList<Point>();
+		int i = 1;
+		while (i <= numberOfPits) {
+			int x = (int) (Math.random() * ((9) + 1));
+			int y = (int) (Math.random() * ((9) + 1));
+			Point possibleNewPoint = new Point(x, y);
+			Boolean occupied = false;
+			for (Point point : pitPoints) {
+				if (possibleNewPoint.equals(point)
+						|| possibleNewPoint.equals(this.wumpusLocation)) {
+					occupied = true;
+					break;
+				}
+			}
+			if (!occupied) {
+				pitPoints.add(possibleNewPoint);
+				i++;
 			}
 		}
-		
-		while(hunterPlaced){
-			int i = rand.nextInt(map.length);
-			int j = rand.nextInt(map.length);
-			if(!map[i][j].getWumpus() && !map[i][j].getPit() && !map[i][j].getSlime() && !map[i][j].getBlood()){
-				// Place Hunter With Meathod
-				//hunter.setLocation(j, i);
-				map[i][j].setHiddenRoom(false);
-				hunterPlaced = true;
+		setPits(pitPoints);
+	}
+
+	/*
+	 * Sets pits and goop with a set of known valid pit points locations. Allows
+	 * for JUnit testing of a static map.
+	 */
+	public void setPits(ArrayList<Point> pitPoints) {
+		for (Point point : pitPoints) {
+			map[point.x][point.y].setPit(true);
+			if (point.x == 0) {
+				map[9][point.y].setSlime(true);
+			} else {
+				map[point.x - 1][point.y].setSlime(true);
 			}
-			
+
+			if (point.x == 9) {
+				map[0][point.y].setSlime(true);
+			} else {
+				map[point.x + 1][point.y].setSlime(true);
+			}
+
+			if (point.y == 0) {
+				map[point.x][9].setSlime(true);
+			} else {
+				map[point.x][point.y - 1].setSlime(true);
+				;
+			}
+
+			if (point.y == 9) {
+				map[point.x][0].setSlime(true);
+			} else {
+				map[point.x][point.y + 1].setSlime(true);
+			}
 		}
-		
-		
-		
 	}
-	
-	public void setPit(int i, int j){
-		map[i][j].setPit(true);
-		map[i][wrapAround(j - 1)].setSlime(true);
-		map[wrapAround(i - 1)][j].setSlime(true);
-		map[i][wrapAround(j + 1)].setSlime(true);
-		map[wrapAround(i + 1)][j].setSlime(true);
+
+	public void generateWumpus() {
+		setWumpus(new Point((int) (Math.random() * ((9) + 1)),
+				(int) (Math.random() * ((9) + 1))));
 	}
-	
-	public void setWumpus(int i, int j){
-		map[i][j].setWumpus(true);
+
+	/*
+	 * Sets the location of a wumpus. Assumes that a valid wumpus location is
+	 * passed.
+	 */
+	public void setWumpus(Point wumpusLocation) {
+		this.wumpusLocation = wumpusLocation;
+//		map[wumpusLocation.x][wumpusLocation.y].setWumpus(true);
+//		if (wumpusLocation.x == 0) {
+//			map[9][wumpusLocation.y].setBlood(true);
+//		} else {
+//			map[wumpusLocation.x - 1][wumpusLocation.y].setBlood(true);
+//		}
+//
+//		if (wumpusLocation.x == 9) {
+//			map[0][wumpusLocation.y].setBlood(true);
+//		} else {
+//			map[wumpusLocation.x + 1][wumpusLocation.y].setBlood(true);
+//		}
+//
+//		if (wumpusLocation.y == 0) {
+//			map[wumpusLocation.x][9].setBlood(true);
+//		} else {
+//			map[wumpusLocation.x][wumpusLocation.y - 1].setBlood(true);
+//		}
+//
+//		if (wumpusLocation.y == 9) {
+//			map[wumpusLocation.x][0].setBlood(true);
+//			;
+//		} else {
+//			map[wumpusLocation.x][wumpusLocation.y + 1].setBlood(true);
+//		}
 		
-		map[i][wrapAround(j - 1)].setBlood(true);
-		map[i][wrapAround(j - 2)].setBlood(true);
+		map[wumpusLocation.x][wumpusLocation.y].setWumpus(true);
 		
-		map[wrapAround(i - 1)][wrapAround(j - 1)].setBlood(true);
-		map[wrapAround(i - 2)][wrapAround(j - 2)].setBlood(true);
+		map[wumpusLocation.x][wrapAround(wumpusLocation.y - 1)].setBlood(true);
+		map[wumpusLocation.x][wrapAround(wumpusLocation.y - 2)].setBlood(true);
 		
-		map[wrapAround(i - 1)][j].setBlood(true);
-		map[wrapAround(i - 2)][j].setBlood(true);
+		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y - 1)].setBlood(true);
 		
-		map[wrapAround(i - 1)][wrapAround(j + 1)].setBlood(true);
-		map[wrapAround(i - 2)][wrapAround(j + 2)].setBlood(true);
+		map[wrapAround(wumpusLocation.x - 1)][wumpusLocation.y].setBlood(true);
+		map[wrapAround(wumpusLocation.x - 2)][wumpusLocation.y].setBlood(true);
 		
-		map[i][wrapAround(j + 1)].setBlood(true);
-		map[i][wrapAround(j + 2)].setBlood(true);
+		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y + 1)].setBlood(true);
 		
-		map[wrapAround(i + 1)][wrapAround(j + 1)].setBlood(true );
-		map[wrapAround(i + 2)][wrapAround(j + 2)].setBlood(true);
+		map[wumpusLocation.x][wrapAround(wumpusLocation.y + 1)].setBlood(true);
+		map[wumpusLocation.x][wrapAround(wumpusLocation.y + 2)].setBlood(true);
 		
-		map[wrapAround(i + 1)][j].setBlood(true);
-		map[wrapAround(i + 2)][j].setBlood(true);
+		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y + 1)].setBlood(true );
 		
-		map[wrapAround(i + 1)][wrapAround(j - 1)].setBlood(true);
-		map[wrapAround(i + 2)][wrapAround(j - 2)].setBlood(true);
+		map[wrapAround(wumpusLocation.x + 1)][wumpusLocation.y].setBlood(true);
+		map[wrapAround(wumpusLocation.x + 2)][wumpusLocation.y].setBlood(true);
+		
+		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y - 1)].setBlood(true);
 	}
 	
 	public int wrapAround(int i){
 		if(i < map.length && i > -1){
 			return i;
 		}else if(i > map.length - 1){
-			return i - (map.length - 1);
+			return i - map.length;
 		}else{
 			return i + map.length;
 		}
 	}
-	
-	
-//	public boolean shotWumpus(boolean horizontal){
-//		int x = hunter.getX();
-//		int y = hunter.getY();
-//		if(horizontal){
-//			for(int i = 0; i < map[y].length; i ++){
-//				if(map[y][i].getWumpus()){
-//					return true;
-//				}
-//			}
-//			
-//		}else{
-//			for(int i = 0; i < map.length; i ++){
-//				if(map[i][x].getWumpus()){
-//					return true;
-//				}
-//			}
-//		}
-//	return false;
-//	}
-	
-	
+
+	public String toString() {
+		String toString = "";
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				if (map[i][j].equals(hunter)) {
+					toString += " [O]";
+				} else if (map[i][j].getHiddenRoom()) {
+					toString += " [X]";
+				} else if (map[i][j].getPit()) {
+					toString += " [P]";
+				} else if (map[i][j].getWumpus()) {
+					toString += " [W]";
+				} else if (map[i][j].getGoop()) {
+					toString += " [G]";
+				} else if (map[i][j].getBlood()) {
+					toString += " [B]";
+				} else if (map[i][j].getSlime()) {
+					toString += " [S]";
+				} else {
+					toString += " [ ]";
+				}
+			}
+			if (i != 9) {
+				toString += "\n";
+			}
+		}
+		return toString;
+	}
+
+	public String toStringDebug() {
+		String toString = "";
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				if (map[i][j].equals(hunter)) {
+					toString += " [O]";
+				} else if (map[i][j].getPit()) {
+					toString += " [P]";
+				} else if (map[i][j].getWumpus()) {
+					toString += " [W]";
+				} else if (map[i][j].getGoop()) {
+					toString += " [G]";
+				} else if (map[i][j].getBlood()) {
+					toString += " [B]";
+				} else if (map[i][j].getSlime()) {
+					toString += " [S]";
+				} else {
+					toString += " [ ]";
+				}
+			}
+			if (i != 9) {
+				toString += "\n";
+			}
+		}
+		return toString;
+	}
+
 }
