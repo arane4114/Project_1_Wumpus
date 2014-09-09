@@ -64,30 +64,30 @@ public class Map {
 	 */
 	public void setPits(ArrayList<Point> pitPoints) {
 		for (Point point : pitPoints) {
-			map[point.x][point.y].setPit(true);
-			if (point.x == 0) {
-				map[9][point.y].setSlime(true);
-			} else {
-				map[point.x - 1][point.y].setSlime(true);
-			}
-
-			if (point.x == 9) {
-				map[0][point.y].setSlime(true);
-			} else {
-				map[point.x + 1][point.y].setSlime(true);
-			}
-
+			map[point.y][point.x].setPit(true);
 			if (point.y == 0) {
-				map[point.x][9].setSlime(true);
+				map[9][point.x].setSlime(true);
 			} else {
-				map[point.x][point.y - 1].setSlime(true);
-				;
+				map[point.y - 1][point.x].setSlime(true);
 			}
 
 			if (point.y == 9) {
-				map[point.x][0].setSlime(true);
+				map[0][point.x].setSlime(true);
 			} else {
-				map[point.x][point.y + 1].setSlime(true);
+				map[point.y + 1][point.x].setSlime(true);
+			}
+
+			if (point.x == 0) {
+				map[point.y][9].setSlime(true);
+			} else {
+				map[point.y][point.x - 1].setSlime(true);
+				;
+			}
+
+			if (point.x == 9) {
+				map[point.y][0].setSlime(true);
+			} else {
+				map[point.y][point.x + 1].setSlime(true);
 			}
 		}
 	}
@@ -103,23 +103,23 @@ public class Map {
 	 */
 	public void setWumpus(Point wumpusLocation) {
 		this.wumpusLocation = wumpusLocation;
-		map[wumpusLocation.x][wumpusLocation.y].setWumpus(true);
+		map[wumpusLocation.y][wumpusLocation.x].setWumpus(true);
 
-		map[wumpusLocation.x][wrapAround(wumpusLocation.y - 1)].setBlood(true);
-		map[wumpusLocation.x][wrapAround(wumpusLocation.y - 2)].setBlood(true);
-		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y - 1)]
+		map[wumpusLocation.y][wrapAround(wumpusLocation.x - 1)].setBlood(true);
+		map[wumpusLocation.y][wrapAround(wumpusLocation.x - 2)].setBlood(true);
+		map[wrapAround(wumpusLocation.y - 1)][wrapAround(wumpusLocation.x - 1)]
 				.setBlood(true);
-		map[wrapAround(wumpusLocation.x - 1)][wumpusLocation.y].setBlood(true);
-		map[wrapAround(wumpusLocation.x - 2)][wumpusLocation.y].setBlood(true);
-		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y + 1)]
+		map[wrapAround(wumpusLocation.y - 1)][wumpusLocation.x].setBlood(true);
+		map[wrapAround(wumpusLocation.y - 2)][wumpusLocation.x].setBlood(true);
+		map[wrapAround(wumpusLocation.y - 1)][wrapAround(wumpusLocation.x + 1)]
 				.setBlood(true);
-		map[wumpusLocation.x][wrapAround(wumpusLocation.y + 1)].setBlood(true);
-		map[wumpusLocation.x][wrapAround(wumpusLocation.y + 2)].setBlood(true);
-		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y + 1)]
+		map[wumpusLocation.y][wrapAround(wumpusLocation.x + 1)].setBlood(true);
+		map[wumpusLocation.y][wrapAround(wumpusLocation.x + 2)].setBlood(true);
+		map[wrapAround(wumpusLocation.y + 1)][wrapAround(wumpusLocation.x + 1)]
 				.setBlood(true);
-		map[wrapAround(wumpusLocation.x + 1)][wumpusLocation.y].setBlood(true);
-		map[wrapAround(wumpusLocation.x + 2)][wumpusLocation.y].setBlood(true);
-		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y - 1)]
+		map[wrapAround(wumpusLocation.y + 1)][wumpusLocation.x].setBlood(true);
+		map[wrapAround(wumpusLocation.y + 2)][wumpusLocation.x].setBlood(true);
+		map[wrapAround(wumpusLocation.y + 1)][wrapAround(wumpusLocation.x - 1)]
 				.setBlood(true);
 
 		invalidPoints.add(new Point(wumpusLocation.x,
