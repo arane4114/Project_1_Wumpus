@@ -1,3 +1,5 @@
+import java.awt.Point;
+
 // test pull
 public class GameRunner {
 	private Map gameMap;
@@ -8,6 +10,9 @@ public class GameRunner {
 		this.gameMap = new Map();
 		gameMap.generateWumpus();
 		gameMap.generatePits();
+		gameMap.generateHunter();
+		// gameMap.setHunter(new Point(4, 4));
+		System.out.println(gameMap.shootArrow('W'));
 	}
 	
 	/*

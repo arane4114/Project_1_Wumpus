@@ -1,11 +1,12 @@
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Map {
 
 	private Cell[][] map;
-	private Cell hunter;
 	private Point wumpusLocation;
+	private Point hunterLocation;												// UPPPPPPPPPPDATE
 
 	public Map() {
 		map = new Cell[10][10];
@@ -81,6 +82,10 @@ public class Map {
 				map[point.x][point.y + 1].setSlime(true);
 			}
 		}
+	
+		for (Point point : pitPoints) {
+			System.out.println(point);
+		}
 	}
 
 	public void generateWumpus() {
@@ -120,27 +125,27 @@ public class Map {
 //			map[wumpusLocation.x][wumpusLocation.y + 1].setBlood(true);
 //		}
 		
-		map[wumpusLocation.x][wumpusLocation.y].setWumpus(true);
+		map[wumpusLocation.y][wumpusLocation.x].setWumpus(true);
 		
-		map[wumpusLocation.x][wrapAround(wumpusLocation.y - 1)].setBlood(true);
-		map[wumpusLocation.x][wrapAround(wumpusLocation.y - 2)].setBlood(true);
+		map[wumpusLocation.y][wrapAround(wumpusLocation.x - 1)].setBlood(true);
+		map[wumpusLocation.y][wrapAround(wumpusLocation.x - 2)].setBlood(true);
 		
-		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y - 1)].setBlood(true);
+		map[wrapAround(wumpusLocation.y - 1)][wrapAround(wumpusLocation.x - 1)].setBlood(true);
 		
-		map[wrapAround(wumpusLocation.x - 1)][wumpusLocation.y].setBlood(true);
-		map[wrapAround(wumpusLocation.x - 2)][wumpusLocation.y].setBlood(true);
+		map[wrapAround(wumpusLocation.y - 1)][wumpusLocation.x].setBlood(true);
+		map[wrapAround(wumpusLocation.y - 2)][wumpusLocation.x].setBlood(true);
 		
-		map[wrapAround(wumpusLocation.x - 1)][wrapAround(wumpusLocation.y + 1)].setBlood(true);
+		map[wrapAround(wumpusLocation.y - 1)][wrapAround(wumpusLocation.x + 1)].setBlood(true);
 		
-		map[wumpusLocation.x][wrapAround(wumpusLocation.y + 1)].setBlood(true);
-		map[wumpusLocation.x][wrapAround(wumpusLocation.y + 2)].setBlood(true);
+		map[wumpusLocation.y][wrapAround(wumpusLocation.x + 1)].setBlood(true);
+		map[wumpusLocation.y][wrapAround(wumpusLocation.x + 2)].setBlood(true);
 		
-		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y + 1)].setBlood(true );
+		map[wrapAround(wumpusLocation.y + 1)][wrapAround(wumpusLocation.x + 1)].setBlood(true );
 		
-		map[wrapAround(wumpusLocation.x + 1)][wumpusLocation.y].setBlood(true);
-		map[wrapAround(wumpusLocation.x + 2)][wumpusLocation.y].setBlood(true);
+		map[wrapAround(wumpusLocation.y + 1)][wumpusLocation.x].setBlood(true);
+		map[wrapAround(wumpusLocation.y + 2)][wumpusLocation.x].setBlood(true);
 		
-		map[wrapAround(wumpusLocation.x + 1)][wrapAround(wumpusLocation.y - 1)].setBlood(true);
+		map[wrapAround(wumpusLocation.y + 1)][wrapAround(wumpusLocation.x - 1)].setBlood(true);
 	}
 	
 	public int wrapAround(int i){
@@ -152,12 +157,69 @@ public class Map {
 			return i + map.length;
 		}
 	}
+	
+	public void generateHunter(){																					// CHARGE HUNTER
+		Random rand = new Random();
+		boolean hunterPlaced = false;
 
+		while(!hunterPlaced){
+			int i = rand.nextInt(map.length);
+			int j = rand.nextInt(map.length);
+			if(!map[i][j].getWumpus() && !map[i][j].getPit() && !map[i][j].getSlime() && !map[i][j].getBlood()){	// CHECK CHECK
+				this.hunterLocation = (new Point(j, i));
+				map[i][j].setHiddenRoom(false);
+				map[i][j].setHunter(true);
+				hunterPlaced = true;
+			}
+		}
+	}
+	
+	public void setHunter(Point hunt){																				// CHANGE HUNTER		
+		int x = (int) hunt.getX();
+		int y = (int) hunt.getY();
+		map[hunterLocation.y][hunterLocation.x].setHunter(false);
+		this.hunterLocation = (new Point(x, y));
+		map[y][x].setHunter(true);
+	}
+	
+	public boolean shootArrow(char x){																				// CHANGE HUNTER
+		if(x == 'A' || x == 'D'){
+			if(hunterLocation.y == wumpusLocation.y){
+				return true;
+			}
+		}else if(x == 'W' || x == 'S'){
+			if(hunterLocation.x == wumpusLocation.x){
+				return true;
+			}
+		}
+	return false;
+	}
+	
+	public void hunterMove(char x){																					// CHENGE HUNTER
+		if(x == 'w'){
+			map[hunterLocation.y][hunterLocation.x].setHunter(false);
+			hunterLocation.move(hunterLocation.x, wrapAround(hunterLocation.y - 1));
+			map[hunterLocation.y][hunterLocation.x].setHunter(true);
+		}else if(x == 's'){
+			map[hunterLocation.y][hunterLocation.y].setHunter(false);
+			hunterLocation.move(hunterLocation.x, wrapAround(hunterLocation.y + 1));
+			map[hunterLocation.y][hunterLocation.x].setHunter(true);
+		}else if(x == 'd'){
+			map[hunterLocation.y][hunterLocation.x].setHunter(false);
+			hunterLocation.move(wrapAround(hunterLocation.x + 1), hunterLocation.y);
+			map[hunterLocation.y][hunterLocation.x].setHunter(true);
+		}else if(x == 'a'){
+			map[hunterLocation.y][hunterLocation.x].setHunter(false);
+			hunterLocation.move(wrapAround(hunterLocation.x - 1), hunterLocation.y);
+			map[hunterLocation.y][hunterLocation.x].setHunter(true);
+		}
+	}
+	
 	public String toString() {
 		String toString = "";
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (map[i][j].equals(hunter)) {
+				if (i == hunterLocation.y && j == hunterLocation.x) {													
 					toString += " [O]";
 				} else if (map[i][j].getHiddenRoom()) {
 					toString += " [X]";
@@ -186,7 +248,7 @@ public class Map {
 		String toString = "";
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
-				if (map[i][j].equals(hunter)) {
+				if (i == hunterLocation.y && j == hunterLocation.x) {													// CHANGE HUNTER
 					toString += " [O]";
 				} else if (map[i][j].getPit()) {
 					toString += " [P]";
