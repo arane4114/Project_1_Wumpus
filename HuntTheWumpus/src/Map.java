@@ -23,6 +23,7 @@ public class Map {
 		}
 		this.invalidPoints = new ArrayList<Point>();
 		this.alive = true;
+		this.hunterLocation = null;
 	}
 
 	/*
@@ -93,6 +94,10 @@ public class Map {
 		}
 	}
 
+	/*
+	 * Generates a wumpus on any random point in the map. The map is empty at
+	 * this point so any point is valid.
+	 */
 	public void generateWumpus() {
 		setWumpus(new Point((int) (Math.random() * ((9) + 1)),
 				(int) (Math.random() * ((9) + 1))));
@@ -163,11 +168,12 @@ public class Map {
 		}
 
 	}
-	
+
 	/*
-	* This Generates a random hunter location that is not a Wumpus, Blood, Pit, Slime.
-	* Uses a simple While loop to try and place Hunter in a random location until successful.
-	*/
+	 * This Generates a random hunter location that is not a Wumpus, Blood, Pit,
+	 * Slime. Uses a simple While loop to try and place Hunter in a random
+	 * location until successful.
+	 */
 	public void generateHunter() {
 		Random rand = new Random();
 		boolean hunterPlaced = false;
@@ -184,24 +190,26 @@ public class Map {
 			}
 		}
 	}
-	
+
 	/*
-	* This is a method for testing, you can place a hunter in any location.
-	* Does not check if your point is valid.
-	*/
+	 * This is a method for testing, you can place a hunter in any location.
+	 * Does not check if your point is valid.
+	 */
 	public void setHunter(Point hunt) {
-		int x = (int) hunt.getX();
-		int y = (int) hunt.getY();
-		map[hunterLocation.y][hunterLocation.x].setHunter(false);
+		int x = (int) hunt.x;
+		int y = (int) hunt.y;
+		if (this.hunterLocation != null) {
+			map[hunterLocation.y][hunterLocation.x].setHunter(false);
+		}
 		this.hunterLocation = (new Point(x, y));
 		map[y][x].setHunter(true);
 	}
 
 	/*
-	* This method shoots the arrow in either the horizontal or vertical direction.
-	* Returns false if you miss and sets alive to false, returns true if wumpus is hit.
-	* Valid inputs are capital 'W' , 'A' , 'S' , 'D'.
-	*/
+	 * This method shoots the arrow in either the horizontal or vertical
+	 * direction. Returns false if you miss and sets alive to false, returns
+	 * true if wumpus is hit. Valid inputs are capital 'W' , 'A' , 'S' , 'D'.
+	 */
 	public boolean shootArrow(char x) {
 		alive = false;
 		if (x == 'A' || x == 'D') {
@@ -215,11 +223,11 @@ public class Map {
 		}
 		return false;
 	}
-	
+
 	/*
-	* This method moves the hunter with wrap around, the valid input is a lower case 'w' ,
-	* 'a' , 's' , 'd'.
-	*/
+	 * This method moves the hunter with wrap around, the valid input is a lower
+	 * case 'w' , 'a' , 's' , 'd'.
+	 */
 	public void hunterMove(char x) {
 		if (x == 'w') {
 			map[hunterLocation.y][hunterLocation.x].setHunter(false);
@@ -248,11 +256,18 @@ public class Map {
 		}
 	}
 
+	/*
+	 * Acts as a getter for alive. This allows the run loop to know when to
+	 * exit.
+	 */
 	public boolean isAlive() {
 		return alive;
 	}
 
-	
+	/*
+	 * Gets a textual representation for every room that the hunter is in. If
+	 * the room the hunter is currently in is lethal, the hunter can be killed.
+	 */
 	public String getCurrentState() {
 		if (getCell(hunterLocation).getGoop()) {
 			return "Eww. You walked onto a reddish green mix of blood and slime. It looks like goop.";
@@ -268,22 +283,20 @@ public class Map {
 			return "You loose you footing and fall into a bottemless pit\n"
 					+ "GAME OVER";
 		}
-		if(getCell(hunterLocation).getWumpus()){
+		if (getCell(hunterLocation).getWumpus()) {
 			alive = false;
 			return "You walk into the wumpus. Dinner is serverd.\n"
-					+ "For the wumpus\n"
-					+ "GAME OVER";
+					+ "For the wumpus.\n" + "GAME OVER";
 		}
-		if(getCell(hunterLocation).getIsEmpty()){
+		if (getCell(hunterLocation).getIsEmpty()) {
 			return "You look around all you see is nothing. The silence is deafaning";
 		}
 		return "";
 	}
 
-
 	/*
-	 * Simple to string that prints out a console representation of the current state of the
-	 * map.
+	 * Simple to string that prints out a console representation of the current
+	 * state of the map.
 	 */
 	public String toString() {
 		String toString = "";
@@ -315,9 +328,9 @@ public class Map {
 	}
 
 	/*
-	* Simple to string that prints out a console representation of the current state of the
-	* map but print all rooms as not hidden.
-	*/
+	 * Simple to string that prints out a console representation of the current
+	 * state of the map but print all rooms as not hidden.
+	 */
 	public String toStringDebug() {
 		String toString = "";
 		for (int i = 0; i < 10; i++) {
@@ -345,4 +358,10 @@ public class Map {
 		return toString;
 	}
 
+	/*
+	 * Returns the hunter's location. This is used in JUnit testing.
+	 */
+	public Point getHunter() {
+		return this.hunterLocation;
+	}
 }

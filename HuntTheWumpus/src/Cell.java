@@ -61,6 +61,7 @@ public class Cell {
 
 	public void setPit(Boolean pit) {
 		this.pit = pit;
+		this.blood = false;
 	}
 
 	public void setWumpus(Boolean wumpus) {

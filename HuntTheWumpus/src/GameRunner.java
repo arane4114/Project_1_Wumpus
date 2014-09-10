@@ -4,7 +4,6 @@
  */
 import java.util.Scanner;
 
-// test pull
 public class GameRunner {
 	private Map gameMap;
 	private Scanner kb;
@@ -51,6 +50,7 @@ public class GameRunner {
 				}
 			}
 		}
+		System.out.println(gameMap);
 	}
 
 	public static void main(String[] args) {
