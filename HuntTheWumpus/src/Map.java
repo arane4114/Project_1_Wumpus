@@ -6,14 +6,23 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
+/*
+ * This class is the main model for the game. It contains all the logic that the game needs to function.
+ */
 public class Map {
 
 	private Cell[][] map;
 	private Point wumpusLocation;
 	private Point hunterLocation;
 	private ArrayList<Point> invalidPoints;
-	private boolean alive;
+	private boolean running;
+	private boolean hitWumpus;
+	private boolean hitSelf;
 
+	/*
+	 * Primary constructor for Map. Sets up the array of cells and other
+	 * required items.
+	 */
 	public Map() {
 		map = new Cell[10][10];
 		for (int i = 0; i < 10; i++) {
@@ -22,7 +31,7 @@ public class Map {
 			}
 		}
 		this.invalidPoints = new ArrayList<Point>();
-		this.alive = true;
+		this.running = true;
 		this.hunterLocation = null;
 	}
 
@@ -31,6 +40,13 @@ public class Map {
 	 */
 	public Cell getCell(Point point) {
 		return map[point.y][point.x];
+	}
+
+	/*
+	 * Returns the hunter's location. This is used exclusively in JUnit testing.
+	 */
+	public Point getHunter() {
+		return this.hunterLocation;
 	}
 
 	/*
@@ -128,6 +144,7 @@ public class Map {
 		map[wrapAround(wumpusLocation.y + 1)][wrapAround(wumpusLocation.x - 1)]
 				.setBlood(true);
 
+		// the invalid points help during pit creation
 		invalidPoints.add(new Point(wumpusLocation.x,
 				wrapAround(wumpusLocation.y - 1)));
 		invalidPoints.add(new Point(wumpusLocation.x,
@@ -193,12 +210,12 @@ public class Map {
 
 	/*
 	 * This is a method for testing, you can place a hunter in any location.
-	 * Does not check if your point is valid.
+	 * Assumes that the point is valid.
 	 */
-	public void setHunter(Point hunt) {
-		int x = (int) hunt.x;
-		int y = (int) hunt.y;
-		if (this.hunterLocation != null) {
+	public void setHunter(Point hunter) {
+		int x = (int) hunter.x;
+		int y = (int) hunter.y;
+		if (this.hunterLocation != null) { // Needed for JUnit statement
 			map[hunterLocation.y][hunterLocation.x].setHunter(false);
 		}
 		this.hunterLocation = (new Point(x, y));
@@ -210,18 +227,17 @@ public class Map {
 	 * direction. Returns false if you miss and sets alive to false, returns
 	 * true if wumpus is hit. Valid inputs are capital 'W' , 'A' , 'S' , 'D'.
 	 */
-	public boolean shootArrow(char x) {
-		alive = false;
+	public void shootArrow(char x) {
 		if (x == 'A' || x == 'D') {
 			if (hunterLocation.y == wumpusLocation.y) {
-				return true;
+				hitWumpus = true;
 			}
 		} else if (x == 'W' || x == 'S') {
 			if (hunterLocation.x == wumpusLocation.x) {
-				return true;
+				hitWumpus = true;
 			}
 		}
-		return false;
+		hitSelf = true;
 	}
 
 	/*
@@ -260,15 +276,29 @@ public class Map {
 	 * Acts as a getter for alive. This allows the run loop to know when to
 	 * exit.
 	 */
-	public boolean isAlive() {
-		return alive;
+	public boolean isRunning() {
+		return running;
 	}
 
 	/*
 	 * Gets a textual representation for every room that the hunter is in. If
-	 * the room the hunter is currently in is lethal, the hunter can be killed.
+	 * and end game condition has been reached, the game ends.
 	 */
 	public String getCurrentState() {
+		if (hitWumpus) {
+			running = false;
+			return "You aim and fire you weapon of choice. Your trusty bow.\n"
+					+ "The arrow whistles through the air. Your aim is true.\n"
+					+ "The beast is dead.\n" + "You return home a hero.";
+		}
+		if (hitSelf) {
+			running = false;
+			return "You aim and fire you weapon of choice. Your trusty bow.\n"
+					+ "The arrow whistles through the air. Alas your target is not in that direction.\n"
+					+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal\n"
+					+ "You hear a sound behind you. Somehow another portal has opened up behind you. The arrow is flying towards you.\n"
+					+ "The arrow hits you in the ending your carrer as an explorer. Unable to walk and loosing blood you die alone.";
+		}
 		if (getCell(hunterLocation).getGoop()) {
 			return "Eww. You walked onto a reddish green mix of blood and slime. It looks like goop.";
 		}
@@ -279,12 +309,12 @@ public class Map {
 			return "Your shoes are now covered in some sort of slime";
 		}
 		if (getCell(hunterLocation).getPit()) {
-			alive = false;
+			running = false;
 			return "You loose you footing and fall into a bottemless pit\n"
 					+ "GAME OVER";
 		}
 		if (getCell(hunterLocation).getWumpus()) {
-			alive = false;
+			running = false;
 			return "You walk into the wumpus. Dinner is serverd.\n"
 					+ "For the wumpus.\n" + "GAME OVER";
 		}
@@ -329,9 +359,10 @@ public class Map {
 
 	/*
 	 * Simple to string that prints out a console representation of the current
-	 * state of the map but print all rooms as not hidden.
+	 * state of the map but print all rooms as not hidden. This is called during
+	 * development and at the end of the game.
 	 */
-	public String toStringDebug() {
+	public String toStringShowAllRooms() {
 		String toString = "";
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -356,12 +387,5 @@ public class Map {
 			}
 		}
 		return toString;
-	}
-
-	/*
-	 * Returns the hunter's location. This is used in JUnit testing.
-	 */
-	public Point getHunter() {
-		return this.hunterLocation;
 	}
 }
