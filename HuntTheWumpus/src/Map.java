@@ -163,7 +163,11 @@ public class Map {
 		}
 
 	}
-
+	
+	/*
+	* This Generates a random hunter location that is not a Wumpus, Blood, Pit, Slime.
+	* Uses a simple While loop to try and place Hunter in a random location until successful.
+	*/
 	public void generateHunter() {
 		Random rand = new Random();
 		boolean hunterPlaced = false;
@@ -180,7 +184,11 @@ public class Map {
 			}
 		}
 	}
-
+	
+	/*
+	* This is a method for testing, you can place a hunter in any location.
+	* Does not check if your point is valid.
+	*/
 	public void setHunter(Point hunt) {
 		int x = (int) hunt.getX();
 		int y = (int) hunt.getY();
@@ -189,6 +197,11 @@ public class Map {
 		map[y][x].setHunter(true);
 	}
 
+	/*
+	* This method shoots the arrow in either the horizontal or vertical direction.
+	* Returns false if you miss and sets alive to false, returns true if wumpus is hit.
+	* Valid inputs are capital 'W' , 'A' , 'S' , 'D'.
+	*/
 	public boolean shootArrow(char x) {
 		alive = false;
 		if (x == 'A' || x == 'D') {
@@ -202,7 +215,11 @@ public class Map {
 		}
 		return false;
 	}
-
+	
+	/*
+	* This method moves the hunter with wrap around, the valid input is a lower case 'w' ,
+	* 'a' , 's' , 'd'.
+	*/
 	public void hunterMove(char x) {
 		if (x == 'w') {
 			map[hunterLocation.y][hunterLocation.x].setHunter(false);
@@ -235,6 +252,7 @@ public class Map {
 		return alive;
 	}
 
+	
 	public String getCurrentState() {
 		if (getCell(hunterLocation).getGoop()) {
 			return "Eww. You walked onto a reddish green mix of blood and slime. It looks like goop.";
@@ -262,6 +280,11 @@ public class Map {
 		return "";
 	}
 
+
+	/*
+	 * Simple to string that prints out a console representation of the current state of the
+	 * map.
+	 */
 	public String toString() {
 		String toString = "";
 		for (int i = 0; i < 10; i++) {
@@ -291,6 +314,10 @@ public class Map {
 		return toString;
 	}
 
+	/*
+	* Simple to string that prints out a console representation of the current state of the
+	* map but print all rooms as not hidden.
+	*/
 	public String toStringDebug() {
 		String toString = "";
 		for (int i = 0; i < 10; i++) {
