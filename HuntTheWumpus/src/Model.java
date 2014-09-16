@@ -4,12 +4,13 @@
  */
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Random;
 
 /*
  * This class is the main model for the game. It contains all the logic that the game needs to function.
  */
-public class Map {
+public class Model extends Observable{
 
 	private Cell[][] map;
 	private Point wumpusLocation;
@@ -18,12 +19,13 @@ public class Map {
 	private boolean running;
 	private boolean hitWumpus;
 	private boolean hitSelf;
+	private String currentState;
 
 	/*
 	 * Primary constructor for Map. Sets up the array of cells and other
 	 * required items.
 	 */
-	public Map() {
+	public Model() {
 		map = new Cell[10][10];
 		for (int i = 0; i < 10; i++) {
 			for (int j = 0; j < 10; j++) {
@@ -238,6 +240,7 @@ public class Map {
 			}
 		}
 		hitSelf = true;
+		updateCurrentState();
 	}
 
 	/*
@@ -270,6 +273,7 @@ public class Map {
 					hunterLocation.y);
 			map[hunterLocation.y][hunterLocation.x].setHunter(true);
 		}
+		updateCurrentState();
 	}
 
 	/*
@@ -280,48 +284,49 @@ public class Map {
 		return running;
 	}
 
+	// update comment
 	/*
 	 * Gets a textual representation for every room that the hunter is in. If
 	 * and end game condition has been reached, the game ends.
 	 */
 	public String getCurrentState() {
+		return this.currentState;
+	}
+
+	private void updateCurrentState() {
 		if (hitWumpus) {
 			running = false;
-			return "You aim and fire you weapon of choice. Your trusty bow.\n"
+			this.currentState = "You aim and fire you weapon of choice. Your trusty bow.\n"
 					+ "The arrow whistles through the air. Your aim is true.\n"
 					+ "The beast is dead.\n" + "You return home a hero.";
-		}
-		if (hitSelf) {
+		} else if (hitSelf) {
 			running = false;
-			return "You aim and fire you weapon of choice. Your trusty bow.\n"
+			this.currentState = "You aim and fire you weapon of choice. Your trusty bow.\n"
 					+ "The arrow whistles through the air. Alas your target is not in that direction.\n"
 					+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal\n"
 					+ "You hear a sound behind you. Somehow another portal has opened up behind you. The arrow is flying towards you.\n"
 					+ "The arrow hits you in the ending your carrer as an explorer. Unable to walk and loosing blood you die alone.";
-		}
-		if (getCell(hunterLocation).getGoop()) {
-			return "Eww. You walked onto a reddish green mix of blood and slime. It looks like goop.";
-		}
-		if (getCell(hunterLocation).getBlood()) {
-			return "Your feet slip a bit. You look down and see the floor covered in blood.";
-		}
-		if (getCell(hunterLocation).getSlime()) {
-			return "Your shoes are now covered in some sort of slime";
-		}
-		if (getCell(hunterLocation).getPit()) {
+		} else if (getCell(hunterLocation).getGoop()) {
+			this.currentState = "Eww. You walked onto a reddish green mix of blood and slime. It looks like goop.";
+		} else if (getCell(hunterLocation).getBlood()) {
+			this.currentState = "Your feet slip a bit. You look down and see the floor covered in blood.";
+		} else if (getCell(hunterLocation).getSlime()) {
+			this.currentState = "Your shoes are now covered in some sort of slime";
+		} else if (getCell(hunterLocation).getPit()) {
 			running = false;
-			return "You loose you footing and fall into a bottemless pit\n"
+			this.currentState = "You loose you footing and fall into a bottemless pit\n"
 					+ "GAME OVER";
-		}
-		if (getCell(hunterLocation).getWumpus()) {
+		} else if (getCell(hunterLocation).getWumpus()) {
 			running = false;
-			return "You walk into the wumpus. Dinner is serverd.\n"
+			this.currentState = "You walk into the wumpus. Dinner is serverd.\n"
 					+ "For the wumpus.\n" + "GAME OVER";
+		} else if (getCell(hunterLocation).getIsEmpty()) {
+			this.currentState = "You look around all you see is nothing. The silence is deafaning";
+		} else {
+			this.currentState = "";
 		}
-		if (getCell(hunterLocation).getIsEmpty()) {
-			return "You look around all you see is nothing. The silence is deafaning";
-		}
-		return "";
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	/*

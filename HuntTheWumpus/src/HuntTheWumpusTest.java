@@ -2,19 +2,19 @@
  * @ - Author: Abhishek Rane
  * @ - Author: Bryce Hammond
  */
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Observable;
 
 import org.junit.Test;
-		
+
 /*
  * This class contains all the tests for the test driven development aspect of the program.
  * Certain user input functions can't be test in JUnit as they are handled in the run loop method.
  */
-public class HuntTheWumpusTest {
+public class HuntTheWumpusTest extends Observable {
 
 	/*
 	 * This test checks the positioning of slime around a pit. There is no
@@ -22,7 +22,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testSlimeLogic() {
-		Map map = new Map();
+		Model map = new Model();
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		Point point = new Point(2, 2);
 		pitPoints.add(point);
@@ -39,7 +39,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testSlimeLogicWithWraparound() {
-		Map map = new Map();
+		Model map = new Model();
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(0, 0));
 		map.setPits(pitPoints);
@@ -55,7 +55,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testSlimeLogicWithMoreWraparound() {
-		Map map = new Map();
+		Model map = new Model();
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(9, 9));
 		map.setPits(pitPoints);
@@ -71,7 +71,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testSetWumpus() {
-		Map map = new Map();
+		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
 		assertTrue(map.getCell(new Point(4, 2)).getBlood());
@@ -93,7 +93,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testWumpusWraparound() {
-		Map map = new Map();
+		Model map = new Model();
 		map.setWumpus(new Point(0, 0));
 		assertTrue(map.getCell(new Point(0, 0)).getWumpus());
 		assertTrue(map.getCell(new Point(1, 0)).getBlood());
@@ -120,7 +120,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testGameAndAllNonLethalStatementsAndPitDeath() {
-		Map map = new Map();
+		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
@@ -268,7 +268,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testGameWalkIntoWumpusDeath() {
-		Map map = new Map();
+		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
@@ -399,7 +399,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testGameShootUpwardsIntoWumpus() {
-		Map map = new Map();
+		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
@@ -532,7 +532,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testGameShootVerticalIntoWumpusWithArrowWraparound() {
-		Map map = new Map();
+		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
@@ -665,7 +665,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testGameShootHorizontal() {
-		Map map = new Map();
+		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
@@ -816,7 +816,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testGameShootHorizontalWithWrapAround() {
-		Map map = new Map();
+		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
@@ -967,7 +967,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testGameShootSelfLeftWrap() {
-		Map map = new Map();
+		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
@@ -1015,9 +1015,9 @@ public class HuntTheWumpusTest {
 		map.shootArrow('A');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
 		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
-		assertTrue(map
-				.getCurrentState()
-				.equals("You aim and fire you weapon of choice. Your trusty bow.\n"
+		assertEquals(
+				map.getCurrentState(),
+				("You aim and fire you weapon of choice. Your trusty bow.\n"
 						+ "The arrow whistles through the air. Alas your target is not in that direction.\n"
 						+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal\n"
 						+ "You hear a sound behind you. Somehow another portal has opened up behind you. The arrow is flying towards you.\n"
@@ -1035,7 +1035,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testGameShootSelfRightWrap() {
-		Map map = new Map();
+		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
@@ -1092,7 +1092,7 @@ public class HuntTheWumpusTest {
 						+ "The arrow hits you in the ending your carrer as an explorer. Unable to walk and loosing blood you die alone."));
 		assertFalse(map.isRunning());
 	}
-	
+
 	/*
 	 * This method will take the role of the game runner and play through an
 	 * entire game scenario. It will not use user input and will pass in valid
@@ -1103,7 +1103,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testGameShootUpWrap() {
-		Map map = new Map();
+		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
@@ -1160,7 +1160,7 @@ public class HuntTheWumpusTest {
 						+ "The arrow hits you in the ending your carrer as an explorer. Unable to walk and loosing blood you die alone."));
 		assertFalse(map.isRunning());
 	}
-	
+
 	/*
 	 * This method will take the role of the game runner and play through an
 	 * entire game scenario. It will not use user input and will pass in valid
@@ -1171,7 +1171,7 @@ public class HuntTheWumpusTest {
 	 */
 	@Test
 	public void testGameShootSelfDownWrap() {
-		Map map = new Map();
+		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
 		assertTrue(map.getCell(new Point(4, 4)).getWumpus());

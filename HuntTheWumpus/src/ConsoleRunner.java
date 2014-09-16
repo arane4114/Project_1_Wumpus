@@ -8,15 +8,15 @@ import java.util.Scanner;
  * This class is the entry point for the application.
  * It also contains the run loop and an input method for the game.
  */
-public class GameRunner {
-	private Map gameMap;
+public class ConsoleRunner {
+	private Model gameMap;
 	private Scanner kb;
 
 	/*
 	 * Default Constructor. Initializes a random map and sets up user input.
 	 */
-	public GameRunner() {
-		this.gameMap = new Map();
+	public ConsoleRunner() {
+		this.gameMap = new Model();
 		gameMap.generateWumpus();
 		gameMap.generatePits();
 		gameMap.generateHunter();
@@ -61,7 +61,7 @@ public class GameRunner {
 	 * loop.
 	 */
 	public static void main(String[] args) {
-		GameRunner game = new GameRunner();
+		ConsoleRunner game = new ConsoleRunner();
 		game.run();
 	}
 
