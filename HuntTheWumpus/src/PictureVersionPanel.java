@@ -1,9 +1,16 @@
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
+
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -24,7 +31,14 @@ public class PictureVersionPanel extends JPanel implements Observer {
 	@Override
 	public void update(Observable o, Object unused) {
 		Model model = (Model) o;
-		text.setText(model.toString());
+		repaint();
 	}
+	
+	  @Override
+	  public void paintComponent(Graphics g) {
+	    super.paintComponent(g);
+	    Graphics2D g2 = (Graphics2D) g;
+	    
+	  }
 
 }
