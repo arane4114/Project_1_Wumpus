@@ -10,12 +10,13 @@ import java.util.Random;
 /*
  * This class is the main model for the game. It contains all the logic that the game needs to function.
  */
-public class Model extends Observable{
+public class Model extends Observable {
 
 	private Cell[][] map;
 	private Point wumpusLocation;
 	private Point hunterLocation;
 	private ArrayList<Point> invalidPoints;
+	private ArrayList<Point> visiblePoints;
 	private boolean running;
 	private boolean hitWumpus;
 	private boolean hitSelf;
@@ -33,8 +34,38 @@ public class Model extends Observable{
 			}
 		}
 		this.invalidPoints = new ArrayList<Point>();
+		this.visiblePoints = new ArrayList<Point>();
 		this.running = true;
 		this.hunterLocation = null;
+	}
+	
+	public void forceChanges(){
+		this.setChanged();
+		this.notifyObservers();
+	}
+
+	public void startNewGame() {
+		map = new Cell[10][10];
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 10; j++) {
+				map[i][j] = new Cell();
+			}
+		}
+		this.invalidPoints = new ArrayList<Point>();
+		this.visiblePoints = new ArrayList<Point>();
+		this.running = true;
+		this.hunterLocation = null;
+		this.currentState = "";
+		this.hitSelf = false;
+		this.hitWumpus = false;
+		
+		generateWumpus();
+		generatePits();
+		generateHunter();
+	}
+	
+	public ArrayList<Point> getVisibleRooms(){
+		return this.visiblePoints;
 	}
 
 	/*
@@ -54,7 +85,7 @@ public class Model extends Observable{
 	/*
 	 * This method generates a set of pits that do not lie on any invalid point.
 	 */
-	public void generatePits() {
+	private void generatePits() {
 		int numberOfPits = 3 + ((int) (Math.random() * ((5 - 3) + 1)));
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		int i = 1;
@@ -116,7 +147,7 @@ public class Model extends Observable{
 	 * Generates a wumpus on any random point in the map. The map is empty at
 	 * this point so any point is valid.
 	 */
-	public void generateWumpus() {
+	private void generateWumpus() {
 		setWumpus(new Point((int) (Math.random() * ((9) + 1)),
 				(int) (Math.random() * ((9) + 1))));
 	}
@@ -175,25 +206,11 @@ public class Model extends Observable{
 	}
 
 	/*
-	 * This encapsulates the wraparound logic needed by the set wumpus method.
-	 */
-	private int wrapAround(int i) {
-		if (i < map.length && i > -1) {
-			return i;
-		} else if (i > map.length - 1) {
-			return i - map.length;
-		} else {
-			return i + map.length;
-		}
-
-	}
-
-	/*
 	 * This Generates a random hunter location that is not a Wumpus, Blood, Pit,
 	 * Slime. Uses a simple While loop to try and place Hunter in a random
 	 * location until successful.
 	 */
-	public void generateHunter() {
+	private void generateHunter() {
 		Random rand = new Random();
 		boolean hunterPlaced = false;
 
@@ -211,6 +228,20 @@ public class Model extends Observable{
 	}
 
 	/*
+	 * This encapsulates the wraparound logic needed by the set wumpus method.
+	 */
+	private int wrapAround(int i) {
+		if (i < map.length && i > -1) {
+			return i;
+		} else if (i > map.length - 1) {
+			return i - map.length;
+		} else {
+			return i + map.length;
+		}
+	
+	}
+
+	/*
 	 * This is a method for testing, you can place a hunter in any location.
 	 * Assumes that the point is valid.
 	 */
@@ -222,6 +253,7 @@ public class Model extends Observable{
 		}
 		this.hunterLocation = (new Point(x, y));
 		map[y][x].setHunter(true);
+		this.visiblePoints.add(getHunter());
 	}
 
 	/*
@@ -230,17 +262,19 @@ public class Model extends Observable{
 	 * true if wumpus is hit. Valid inputs are capital 'W' , 'A' , 'S' , 'D'.
 	 */
 	public void shootArrow(char x) {
-		if (x == 'A' || x == 'D') {
-			if (hunterLocation.y == wumpusLocation.y) {
-				hitWumpus = true;
+		if (running) {
+			if (x == 'A' || x == 'D') {
+				if (hunterLocation.y == wumpusLocation.y) {
+					hitWumpus = true;
+				}
+			} else if (x == 'W' || x == 'S') {
+				if (hunterLocation.x == wumpusLocation.x) {
+					hitWumpus = true;
+				}
 			}
-		} else if (x == 'W' || x == 'S') {
-			if (hunterLocation.x == wumpusLocation.x) {
-				hitWumpus = true;
-			}
+			hitSelf = true;
+			updateCurrentState();
 		}
-		hitSelf = true;
-		updateCurrentState();
 	}
 
 	/*
@@ -248,32 +282,35 @@ public class Model extends Observable{
 	 * case 'w' , 'a' , 's' , 'd'.
 	 */
 	public void hunterMove(char x) {
-		if (x == 'w') {
-			map[hunterLocation.y][hunterLocation.x].setHunter(false);
-			map[hunterLocation.y][hunterLocation.x].setHiddenRoom(false);
-			hunterLocation.move(hunterLocation.x,
-					wrapAround(hunterLocation.y - 1));
-			map[hunterLocation.y][hunterLocation.x].setHunter(true);
-		} else if (x == 's') {
-			map[hunterLocation.y][hunterLocation.y].setHunter(false);
-			map[hunterLocation.y][hunterLocation.x].setHiddenRoom(false);
-			hunterLocation.move(hunterLocation.x,
-					wrapAround(hunterLocation.y + 1));
-			map[hunterLocation.y][hunterLocation.x].setHunter(true);
-		} else if (x == 'd') {
-			map[hunterLocation.y][hunterLocation.x].setHunter(false);
-			map[hunterLocation.y][hunterLocation.x].setHiddenRoom(false);
-			hunterLocation.move(wrapAround(hunterLocation.x + 1),
-					hunterLocation.y);
-			map[hunterLocation.y][hunterLocation.x].setHunter(true);
-		} else if (x == 'a') {
-			map[hunterLocation.y][hunterLocation.x].setHunter(false);
-			map[hunterLocation.y][hunterLocation.x].setHiddenRoom(false);
-			hunterLocation.move(wrapAround(hunterLocation.x - 1),
-					hunterLocation.y);
-			map[hunterLocation.y][hunterLocation.x].setHunter(true);
+		if (running) {
+			if (x == 'w') {
+				map[hunterLocation.y][hunterLocation.x].setHunter(false);
+				map[hunterLocation.y][hunterLocation.x].setHiddenRoom(false);
+				hunterLocation.move(hunterLocation.x,
+						wrapAround(hunterLocation.y - 1));
+				map[hunterLocation.y][hunterLocation.x].setHunter(true);
+			} else if (x == 's') {
+				map[hunterLocation.y][hunterLocation.y].setHunter(false);
+				map[hunterLocation.y][hunterLocation.x].setHiddenRoom(false);
+				hunterLocation.move(hunterLocation.x,
+						wrapAround(hunterLocation.y + 1));
+				map[hunterLocation.y][hunterLocation.x].setHunter(true);
+			} else if (x == 'd') {
+				map[hunterLocation.y][hunterLocation.x].setHunter(false);
+				map[hunterLocation.y][hunterLocation.x].setHiddenRoom(false);
+				hunterLocation.move(wrapAround(hunterLocation.x + 1),
+						hunterLocation.y);
+				map[hunterLocation.y][hunterLocation.x].setHunter(true);
+			} else if (x == 'a') {
+				map[hunterLocation.y][hunterLocation.x].setHunter(false);
+				map[hunterLocation.y][hunterLocation.x].setHiddenRoom(false);
+				hunterLocation.move(wrapAround(hunterLocation.x - 1),
+						hunterLocation.y);
+				map[hunterLocation.y][hunterLocation.x].setHunter(true);
+			}
+			this.visiblePoints.add(getHunter());
+			updateCurrentState();
 		}
-		updateCurrentState();
 	}
 
 	/*
