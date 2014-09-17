@@ -67,6 +67,7 @@ public class Model extends Observable {
 	public ArrayList<Point> getVisibleRooms(){
 		return this.visiblePoints;
 	}
+	
 	public void toStringVis(){
 		for (Point p : visiblePoints){
 			System.out.println(p);
@@ -230,6 +231,7 @@ public class Model extends Observable {
 				hunterPlaced = true;
 			}
 		}
+	this.visiblePoints.add(new Point (getHunter()));
 	}
 
 	/*
