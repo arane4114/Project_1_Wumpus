@@ -1,12 +1,9 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -23,14 +20,13 @@ public class PictureVersionPanel extends JPanel implements Observer {
 	private BufferedImage slimePitImage;
 	private BufferedImage theHunterImage;
 	private BufferedImage wumpusImage;
-	
-	private ArrayList<Point> visiblePoints;
+
 	private Model model;
-	
-	private final int DELTAX = 50;
-	private final int DELTAY = 50;
-	private final int X = 10;
-	private final int Y = 5;
+
+	private final int DELTA_X = 50;
+	private final int DELTA_Y = 50;
+	private final int X_BASE = 10;
+	private final int Y_BASE = 5;
 
 	public PictureVersionPanel() {
 		this.setPreferredSize(new Dimension(500, 500));
@@ -44,9 +40,8 @@ public class PictureVersionPanel extends JPanel implements Observer {
 			wumpusImage = ImageIO.read(new File("Wumpus.png"));
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(new JFrame(),
-				    "Cannot load 1 or more image files",
-				    "Loading error",
-				    JOptionPane.ERROR_MESSAGE);
+					"Cannot load 1 or more image files.", "Loading error",
+					JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		}
 	}
@@ -55,37 +50,41 @@ public class PictureVersionPanel extends JPanel implements Observer {
 	public void update(Observable o, Object unused) {
 		Model model = (Model) o;
 		this.model = model;
-		visiblePoints = model.getVisibleRooms();
 		repaint();
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.fillRect (X, Y, 500, 500);
-		for (Point p : visiblePoints){
-			
-			g.drawImage(groundImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
-			
-			if(model.getCell(p).getWumpus()){
-				g.drawImage(wumpusImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
-			}else if(model.getCell(p).getPit()){
-				g.drawImage(slimePitImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
-			}else if (model.getCell(p).getGoop()){
-				g.drawImage(goopImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
-			}else if(model.getCell(p).getBlood()){
-				g.drawImage(bloodImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
-			}else if(model.getCell(p).getSlime()){
-				g.drawImage(slimeImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
-			}
+		g.fillRect(X_BASE, Y_BASE, 500, 500);
+		for (Point p : this.model.getVisibleRooms()) {
 
-			if(model.getCell(p).getHunter()){
-				g.drawImage(theHunterImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
+			g.drawImage(groundImage, ((p.x * DELTA_X) + X_BASE),
+					((p.y * DELTA_Y) + Y_BASE), null);
+
+			if (model.getCell(p).getWumpus()) {
+				g.drawImage(wumpusImage, ((p.x * DELTA_X) + X_BASE),
+						((p.y * DELTA_Y) + Y_BASE), null);
+			} else if (model.getCell(p).getPit()) {
+				g.drawImage(slimePitImage, ((p.x * DELTA_X) + X_BASE),
+						((p.y * DELTA_Y) + Y_BASE), null);
+			} else if (model.getCell(p).getGoop()) {
+				g.drawImage(goopImage, ((p.x * DELTA_X) + X_BASE),
+						((p.y * DELTA_Y) + Y_BASE), null);
+			} else if (model.getCell(p).getBlood()) {
+				g.drawImage(bloodImage, ((p.x * DELTA_X) + X_BASE),
+						((p.y * DELTA_Y) + Y_BASE), null);
+			} else if (model.getCell(p).getSlime()) {
+				g.drawImage(slimeImage, ((p.x * DELTA_X) + X_BASE),
+						((p.y * DELTA_Y) + Y_BASE), null);
 			}
+			
+			if (model.getCell(p).getHunter()) {
+				g.drawImage(theHunterImage, ((p.x * DELTA_X) + X_BASE),
+						((p.y * DELTA_Y) + Y_BASE), null);
+			}
+			
 		}
-	}
 
-	public void forceRedraw() {
-		repaint();
 	}
 }

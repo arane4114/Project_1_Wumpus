@@ -55,9 +55,4 @@ public class TextVersionPanel extends JPanel implements Observer {
 			textMsg.setForeground(Color.BLACK);
 		}
 	}
-
-	public void forceRedraw() {
-		repaint();
-	}
-
 }

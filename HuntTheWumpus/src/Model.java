@@ -39,7 +39,7 @@ public class Model extends Observable {
 		this.hunterLocation = null;
 	}
 	
-	public void forceChanges(){
+	public void forceUpdate(){
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -336,15 +336,29 @@ public class Model extends Observable {
 	public String getCurrentState() {
 		return this.currentState;
 	}
-
+	
+	private void endGame(){
+		running = false;
+		this.visiblePoints.clear();
+		for(int i = 0; i < 10; i++){
+			for(int j = 0; j < 10; j++){
+				this.visiblePoints.add(new Point(i,j));
+			}
+		}
+	}
+	
+	public boolean hasHitSelf(){
+		return this.hitSelf;
+	}
+	
 	private void updateCurrentState() {
 		if (hitWumpus) {
-			running = false;
+			endGame();
 			this.currentState = "You aim and fire you weapon of choice. Your trusty bow.\n"
 					+ "The arrow whistles through the air. Your aim is true.\n"
 					+ "The beast is dead.\n" + "You return home a hero.";
 		} else if (hitSelf) {
-			running = false;
+			endGame();
 			this.currentState = "You aim and fire you weapon of choice. Your trusty bow.\n"
 					+ "The arrow whistles through the air. Alas your target is not in that direction.\n"
 					+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal.\n"
@@ -357,11 +371,11 @@ public class Model extends Observable {
 		} else if (getCell(hunterLocation).getSlime()) {
 			this.currentState = "Your shoes are now covered in some sort of slime.";
 		} else if (getCell(hunterLocation).getPit()) {
-			running = false;
+			endGame();
 			this.currentState = "You loose you footing and fall into a bottemless pit.\n"
 					+ "GAME OVER";
 		} else if (getCell(hunterLocation).getWumpus()) {
-			running = false;
+			endGame();
 			this.currentState = "You walk into the wumpus. Dinner is serverd.\n"
 					+ "For the wumpus.\n" + "GAME OVER";
 		} else if (getCell(hunterLocation).getIsEmpty()) {

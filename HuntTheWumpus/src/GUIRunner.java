@@ -1,19 +1,15 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Observer;
 
-import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-@SuppressWarnings("serial")
+
 public class GUIRunner extends JFrame {
 	private Model gameModel;
 	private MoveButtonPanel moveButtons;
@@ -63,17 +59,14 @@ public class GUIRunner extends JFrame {
 		gameModel.addObserver((Observer) picturePanel);
 
 		setVisible(true);
-		this.gameModel.forceChanges();
+		this.gameModel.forceUpdate();
 	}
 
-	private void resetGame() {
-		this.gameModel.startNewGame();
-	}
 
 	private class resetButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			resetGame();
-			gameModel.forceChanges();
+			gameModel.startNewGame();
+			gameModel.forceUpdate();
 		}
 	}
 
