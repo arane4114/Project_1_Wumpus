@@ -64,23 +64,21 @@ public class PictureVersionPanel extends JPanel implements Observer {
 		super.paintComponent(g);
 		g.fillRect (X, Y, 500, 500);
 		for (Point p : visiblePoints){
+			
 			g.drawImage(groundImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
-			if (model.getCell(p).getGoop()){
+			
+			if(model.getCell(p).getWumpus()){
+				g.drawImage(wumpusImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
+			}else if(model.getCell(p).getPit()){
+				g.drawImage(slimePitImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
+			}else if (model.getCell(p).getGoop()){
 				g.drawImage(goopImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
 			}else if(model.getCell(p).getBlood()){
 				g.drawImage(bloodImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
 			}else if(model.getCell(p).getSlime()){
 				g.drawImage(slimeImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
 			}
-			
-			if(model.getCell(p).getWumpus()){
-				g.drawImage(wumpusImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
-			}
-			 
-			if(model.getCell(p).getPit()){
-				g.drawImage(slimePitImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
-			}
-			
+
 			if(model.getCell(p).getHunter()){
 				g.drawImage(theHunterImage, ((p.x * DELTAX) + 10), ((p.y * DELTAY) + 5), null);
 			}
@@ -90,5 +88,4 @@ public class PictureVersionPanel extends JPanel implements Observer {
 	public void forceRedraw() {
 		repaint();
 	}
-
 }
