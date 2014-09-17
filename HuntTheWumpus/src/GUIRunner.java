@@ -29,7 +29,7 @@ public class GUIRunner extends JFrame {
 		this.gameModel.startNewGame();
 
 		setTitle("Hunt The Wumpus");
-		setSize(621, 638);
+		setSize(530, 638);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

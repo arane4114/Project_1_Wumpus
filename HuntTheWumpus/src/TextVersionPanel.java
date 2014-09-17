@@ -13,19 +13,19 @@ public class TextVersionPanel extends JPanel implements Observer {
 	private JTextArea textMsg;
 
 	public TextVersionPanel() {
-		this.setSize(600, 500);
+		this.setSize(500, 500);
 		text = new JTextArea();
 		setLayout(null);
-		text.setSize(600, 300);
+		text.setSize(500, 300);
 		this.setPreferredSize(new Dimension(500, 500));
-		text.setFont(new Font("Courier", Font.BOLD, 24));
+		text.setFont(new Font("Courier", Font.BOLD, 20));
 		add(text);
 
 		textMsg = new JTextArea();
 		setLayout(null);
-		textMsg.setSize(600, 200);
+		textMsg.setSize(500, 200);
 		textMsg.setLocation(3, 305);
-		textMsg.setFont(new Font("Courier", Font.BOLD, 17));
+		textMsg.setFont(new Font("Courier", Font.BOLD, 14));
 		add(textMsg, BorderLayout.SOUTH);
 		textMsg.setLineWrap(true);
 		textMsg.setWrapStyleWord(true);

@@ -171,7 +171,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('s');
 		assertTrue(map.getHunter().equals(new Point(4, 9)));
@@ -179,7 +179,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 9)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 9)));
@@ -187,7 +187,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(3, 9)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -195,7 +195,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
@@ -203,7 +203,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 7)));
@@ -211,7 +211,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 7)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 6)));
@@ -246,14 +246,14 @@ public class HuntTheWumpusTest extends Observable {
 		assertFalse(map.getCell(new Point(5, 6)).getIsEmpty());
 		assertTrue(map.getCell(new Point(5, 6)).getSlime());
 		assertTrue(map.getCurrentState().equals(
-				"Your shoes are now covered in some sort of slime"));
+				"Your shoes are now covered in some sort of slime."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(5, 5)));
 		assertFalse(map.getCell(new Point(5, 5)).getIsEmpty());
 		assertTrue(map.getCell(new Point(5, 5)).getPit());
 		assertTrue(map.getCurrentState().equals(
-				"You loose you footing and fall into a bottemless pit\n"
+				"You loose you footing and fall into a bottemless pit.\n"
 						+ "GAME OVER"));
 		assertFalse(map.isRunning());
 	}
@@ -319,7 +319,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('s');
 		assertTrue(map.getHunter().equals(new Point(4, 9)));
@@ -327,7 +327,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 9)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 9)));
@@ -335,7 +335,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(3, 9)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -343,7 +343,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
@@ -351,7 +351,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 7)));
@@ -359,7 +359,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 7)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 6)));
@@ -450,7 +450,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('s');
 		assertTrue(map.getHunter().equals(new Point(4, 9)));
@@ -458,7 +458,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 9)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 9)));
@@ -466,7 +466,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(3, 9)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -474,7 +474,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
@@ -482,7 +482,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 7)));
@@ -490,7 +490,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 7)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 6)));
@@ -583,7 +583,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('s');
 		assertTrue(map.getHunter().equals(new Point(4, 9)));
@@ -591,7 +591,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 9)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 9)));
@@ -599,7 +599,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(3, 9)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -607,7 +607,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
@@ -615,7 +615,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 7)));
@@ -623,7 +623,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 7)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 6)));
@@ -716,7 +716,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('s');
 		assertTrue(map.getHunter().equals(new Point(4, 9)));
@@ -724,7 +724,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 9)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 9)));
@@ -732,7 +732,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(3, 9)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -740,7 +740,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
@@ -748,7 +748,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 7)));
@@ -756,7 +756,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 7)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 6)));
@@ -867,7 +867,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('s');
 		assertTrue(map.getHunter().equals(new Point(4, 9)));
@@ -875,7 +875,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 9)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 9)));
@@ -883,7 +883,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(3, 9)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -891,7 +891,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
@@ -899,7 +899,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 7)));
@@ -907,7 +907,7 @@ public class HuntTheWumpusTest extends Observable {
 		assertTrue(map.getCell(new Point(4, 7)).getIsEmpty());
 		assertTrue(map
 				.getCurrentState()
-				.equals("You look around all you see is nothing. The silence is deafaning"));
+				.equals("You look around all you see is nothing. The silence is deafaning."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 6)));
@@ -1019,7 +1019,7 @@ public class HuntTheWumpusTest extends Observable {
 				map.getCurrentState(),
 				("You aim and fire you weapon of choice. Your trusty bow.\n"
 						+ "The arrow whistles through the air. Alas your target is not in that direction.\n"
-						+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal\n"
+						+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal.\n"
 						+ "You hear a sound behind you. Somehow another portal has opened up behind you. The arrow is flying towards you.\n"
 						+ "The arrow hits you in the ending your carrer as an explorer. Unable to walk and loosing blood you die alone."));
 		assertFalse(map.isRunning());
@@ -1087,7 +1087,7 @@ public class HuntTheWumpusTest extends Observable {
 				.getCurrentState()
 				.equals("You aim and fire you weapon of choice. Your trusty bow.\n"
 						+ "The arrow whistles through the air. Alas your target is not in that direction.\n"
-						+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal\n"
+						+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal.\n"
 						+ "You hear a sound behind you. Somehow another portal has opened up behind you. The arrow is flying towards you.\n"
 						+ "The arrow hits you in the ending your carrer as an explorer. Unable to walk and loosing blood you die alone."));
 		assertFalse(map.isRunning());
@@ -1155,7 +1155,7 @@ public class HuntTheWumpusTest extends Observable {
 				.getCurrentState()
 				.equals("You aim and fire you weapon of choice. Your trusty bow.\n"
 						+ "The arrow whistles through the air. Alas your target is not in that direction.\n"
-						+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal\n"
+						+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal.\n"
 						+ "You hear a sound behind you. Somehow another portal has opened up behind you. The arrow is flying towards you.\n"
 						+ "The arrow hits you in the ending your carrer as an explorer. Unable to walk and loosing blood you die alone."));
 		assertFalse(map.isRunning());
@@ -1223,7 +1223,7 @@ public class HuntTheWumpusTest extends Observable {
 				.getCurrentState()
 				.equals("You aim and fire you weapon of choice. Your trusty bow.\n"
 						+ "The arrow whistles through the air. Alas your target is not in that direction.\n"
-						+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal\n"
+						+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal.\n"
 						+ "You hear a sound behind you. Somehow another portal has opened up behind you. The arrow is flying towards you.\n"
 						+ "The arrow hits you in the ending your carrer as an explorer. Unable to walk and loosing blood you die alone."));
 		assertFalse(map.isRunning());

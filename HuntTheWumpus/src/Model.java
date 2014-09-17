@@ -67,6 +67,11 @@ public class Model extends Observable {
 	public ArrayList<Point> getVisibleRooms(){
 		return this.visiblePoints;
 	}
+	public void toStringVis(){
+		for (Point p : visiblePoints){
+			System.out.println(p);
+		}
+	}
 
 	/*
 	 * Returns a cell of the map given a point.
@@ -253,7 +258,7 @@ public class Model extends Observable {
 		}
 		this.hunterLocation = (new Point(x, y));
 		map[y][x].setHunter(true);
-		this.visiblePoints.add(getHunter());
+		this.visiblePoints.add(new Point (getHunter()));
 	}
 
 	/*
@@ -308,7 +313,7 @@ public class Model extends Observable {
 						hunterLocation.y);
 				map[hunterLocation.y][hunterLocation.x].setHunter(true);
 			}
-			this.visiblePoints.add(getHunter());
+			this.visiblePoints.add(new Point (getHunter()));
 			updateCurrentState();
 		}
 	}
