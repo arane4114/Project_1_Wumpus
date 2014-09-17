@@ -303,7 +303,7 @@ public class Model extends Observable{
 			running = false;
 			this.currentState = "You aim and fire you weapon of choice. Your trusty bow.\n"
 					+ "The arrow whistles through the air. Alas your target is not in that direction.\n"
-					+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal\n"
+					+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal.\n"
 					+ "You hear a sound behind you. Somehow another portal has opened up behind you. The arrow is flying towards you.\n"
 					+ "The arrow hits you in the ending your carrer as an explorer. Unable to walk and loosing blood you die alone.";
 		} else if (getCell(hunterLocation).getGoop()) {
@@ -311,17 +311,17 @@ public class Model extends Observable{
 		} else if (getCell(hunterLocation).getBlood()) {
 			this.currentState = "Your feet slip a bit. You look down and see the floor covered in blood.";
 		} else if (getCell(hunterLocation).getSlime()) {
-			this.currentState = "Your shoes are now covered in some sort of slime";
+			this.currentState = "Your shoes are now covered in some sort of slime.";
 		} else if (getCell(hunterLocation).getPit()) {
 			running = false;
-			this.currentState = "You loose you footing and fall into a bottemless pit\n"
+			this.currentState = "You loose you footing and fall into a bottemless pit.\n"
 					+ "GAME OVER";
 		} else if (getCell(hunterLocation).getWumpus()) {
 			running = false;
 			this.currentState = "You walk into the wumpus. Dinner is serverd.\n"
 					+ "For the wumpus.\n" + "GAME OVER";
 		} else if (getCell(hunterLocation).getIsEmpty()) {
-			this.currentState = "You look around all you see is nothing. The silence is deafaning";
+			this.currentState = "You look around all you see is nothing. The silence is deafaning.";
 		} else {
 			this.currentState = "";
 		}
