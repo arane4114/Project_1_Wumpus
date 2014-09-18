@@ -79,7 +79,7 @@ public class PictureVersionPanel extends JPanel implements Observer {
 						((p.y * DELTA_Y) + Y_BASE), null);
 			}
 			
-			if (model.getCell(p).getHunter()) {
+			if (p.y == model.getHunter().y && p.x == model.getHunter().x) {
 				g.drawImage(theHunterImage, ((p.x * DELTA_X) + X_BASE),
 						((p.y * DELTA_Y) + Y_BASE), null);
 			}
