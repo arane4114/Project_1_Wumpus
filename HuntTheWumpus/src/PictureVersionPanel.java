@@ -1,3 +1,9 @@
+/*
+ * @ - Author: Abhishek Rane
+ * 
+ * @ - Author: Bryce Hammond
+ */
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -12,6 +18,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+/*
+ * GUI Panel for graphic view.
+ */
 public class PictureVersionPanel extends JPanel implements Observer {
 	private BufferedImage bloodImage;
 	private BufferedImage goopImage;
@@ -22,12 +31,16 @@ public class PictureVersionPanel extends JPanel implements Observer {
 	private BufferedImage wumpusImage;
 
 	private Model model;
+	private boolean shownEndGamePanel = false;
 
 	private final int DELTA_X = 50;
 	private final int DELTA_Y = 50;
 	private final int X_BASE = 10;
 	private final int Y_BASE = 5;
 
+	/*
+	 * Loads images from disk, and ends program if images do not exist
+	 */
 	public PictureVersionPanel() {
 		this.setPreferredSize(new Dimension(500, 500));
 		try {
@@ -46,6 +59,9 @@ public class PictureVersionPanel extends JPanel implements Observer {
 		}
 	}
 
+	/*
+	 * Updates model and calls repaint on this panel. 
+	 */
 	@Override
 	public void update(Observable o, Object unused) {
 		Model model = (Model) o;
@@ -53,6 +69,9 @@ public class PictureVersionPanel extends JPanel implements Observer {
 		repaint();
 	}
 
+	/*
+	 * Updates graphic.
+	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -62,19 +81,19 @@ public class PictureVersionPanel extends JPanel implements Observer {
 			g.drawImage(groundImage, ((p.x * DELTA_X) + X_BASE),
 					((p.y * DELTA_Y) + Y_BASE), null);
 
-			if (model.getCell(p).getWumpus()) {
+			if (model.getCell(p).isWumpus()) {
 				g.drawImage(wumpusImage, ((p.x * DELTA_X) + X_BASE),
 						((p.y * DELTA_Y) + Y_BASE), null);
-			} else if (model.getCell(p).getPit()) {
+			} else if (model.getCell(p).isPit()) {
 				g.drawImage(slimePitImage, ((p.x * DELTA_X) + X_BASE),
 						((p.y * DELTA_Y) + Y_BASE), null);
-			} else if (model.getCell(p).getGoop()) {
+			} else if (model.getCell(p).isGoop()) {
 				g.drawImage(goopImage, ((p.x * DELTA_X) + X_BASE),
 						((p.y * DELTA_Y) + Y_BASE), null);
-			} else if (model.getCell(p).getBlood()) {
+			} else if (model.getCell(p).isBlood()) {
 				g.drawImage(bloodImage, ((p.x * DELTA_X) + X_BASE),
 						((p.y * DELTA_Y) + Y_BASE), null);
-			} else if (model.getCell(p).getSlime()) {
+			} else if (model.getCell(p).isSlime()) {
 				g.drawImage(slimeImage, ((p.x * DELTA_X) + X_BASE),
 						((p.y * DELTA_Y) + Y_BASE), null);
 			}
@@ -85,6 +104,23 @@ public class PictureVersionPanel extends JPanel implements Observer {
 			}
 			
 		}
-
+		
+		if(!shownEndGamePanel && (model.hasHitSelf() || this.model.hasHitWumpus())) {
+			JOptionPane.showMessageDialog(null,
+					this.model.getCurrentState(), "End Game",
+					JOptionPane.PLAIN_MESSAGE);
+			shownEndGamePanel = true;
+		}
+		if(shownEndGamePanel){
+			repaint();
+		}
+		
+	}
+	
+	/*
+	 * Tells the panel that a new game has started.
+	 */
+	public void reset(){
+		shownEndGamePanel = false;
 	}
 }

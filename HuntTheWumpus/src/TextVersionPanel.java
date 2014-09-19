@@ -1,3 +1,8 @@
+/*
+ * @ - Author: Abhishek Rane
+ * 
+ * @ - Author: Bryce Hammond
+ */
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,10 +13,17 @@ import java.util.Observer;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+/*
+ * GUI panel for text view of game.
+ */
 public class TextVersionPanel extends JPanel implements Observer {
 	private JTextArea text;
 	private JTextArea textMsg;
 
+	/*
+	 * Initializes two text areas for a text view of the game
+	 * and current state updates.
+	 */
 	public TextVersionPanel() {
 		this.setSize(500, 500);
 		text = new JTextArea();
@@ -31,6 +43,10 @@ public class TextVersionPanel extends JPanel implements Observer {
 		textMsg.setWrapStyleWord(true);
 	}
 
+	/*
+	 * Updates both text areas with current game map and state
+	 * changes colors to match current room.
+	 */
 	@Override
 	public void update(Observable o, Object unused) {
 		Model model = (Model) o;
@@ -41,13 +57,13 @@ public class TextVersionPanel extends JPanel implements Observer {
 		}
 		textMsg.setText(model.getCurrentState());
 
-		if (model.getCell(model.getHunter()).getGoop()) {
+		if (model.getCell(model.getHunter()).isGoop()) {
 			text.setForeground(Color.ORANGE);
 			textMsg.setForeground(Color.ORANGE);
-		} else if (model.getCell(model.getHunter()).getBlood()) {
+		} else if (model.getCell(model.getHunter()).isBlood()) {
 			text.setForeground(Color.RED);
 			textMsg.setForeground(Color.RED);
-		} else if (model.getCell(model.getHunter()).getSlime()) {
+		} else if (model.getCell(model.getHunter()).isSlime()) {
 			text.setForeground(Color.GREEN);
 			textMsg.setForeground(Color.GREEN);
 		} else {

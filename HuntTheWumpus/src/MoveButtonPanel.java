@@ -1,4 +1,10 @@
+/*
+ * @ - Author: Abhishek Rane
+
+ * @ - Author: Bryce Hammond
+ */
 import java.awt.Dimension;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,11 +13,18 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicArrowButton;
 
+/*
+ * Creates a panel of buttons allowing the user to move in four directions.
+ * Heavily references section code.
+ */
 public class MoveButtonPanel extends JPanel {
 	private Model gameModel; // the panel to control
 
 	private BasicArrowButton up, down, left, right; // arrow buttons
 
+	/*
+	 * Action listener for movement buttons.
+	 */
 	private class ButtonMoveListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			if (arg0.getSource() == up) {
@@ -25,7 +38,10 @@ public class MoveButtonPanel extends JPanel {
 			}
 		}
 	}
-
+	
+	/*
+	 * Creates buttons and links them to listener.
+	 */
 	public MoveButtonPanel(Model gameModel) {
 		super();
 

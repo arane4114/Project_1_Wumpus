@@ -27,11 +27,11 @@ public class HuntTheWumpusTest extends Observable {
 		Point point = new Point(2, 2);
 		pitPoints.add(point);
 		map.setPits(pitPoints);
-		assertTrue(map.getCell(point).getPit());
-		assertTrue(map.getCell(new Point(1, 2)).getSlime());
-		assertTrue(map.getCell(new Point(3, 2)).getSlime());
-		assertTrue(map.getCell(new Point(2, 1)).getSlime());
-		assertTrue(map.getCell(new Point(2, 3)).getSlime());
+		assertTrue(map.getCell(point).isPit());
+		assertTrue(map.getCell(new Point(1, 2)).isSlime());
+		assertTrue(map.getCell(new Point(3, 2)).isSlime());
+		assertTrue(map.getCell(new Point(2, 1)).isSlime());
+		assertTrue(map.getCell(new Point(2, 3)).isSlime());
 	}
 
 	/*
@@ -43,11 +43,11 @@ public class HuntTheWumpusTest extends Observable {
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(0, 0));
 		map.setPits(pitPoints);
-		assertTrue(map.getCell(new Point(0, 0)).getPit());
-		assertTrue(map.getCell(new Point(0, 1)).getSlime());
-		assertTrue(map.getCell(new Point(1, 0)).getSlime());
-		assertTrue(map.getCell(new Point(0, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 0)).getSlime());
+		assertTrue(map.getCell(new Point(0, 0)).isPit());
+		assertTrue(map.getCell(new Point(0, 1)).isSlime());
+		assertTrue(map.getCell(new Point(1, 0)).isSlime());
+		assertTrue(map.getCell(new Point(0, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 0)).isSlime());
 	}
 
 	/*
@@ -59,11 +59,11 @@ public class HuntTheWumpusTest extends Observable {
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(9, 9));
 		map.setPits(pitPoints);
-		assertTrue(map.getCell(new Point(9, 9)).getPit());
-		assertTrue(map.getCell(new Point(8, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 8)).getSlime());
-		assertTrue(map.getCell(new Point(0, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 0)).getSlime());
+		assertTrue(map.getCell(new Point(9, 9)).isPit());
+		assertTrue(map.getCell(new Point(8, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 8)).isSlime());
+		assertTrue(map.getCell(new Point(0, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 0)).isSlime());
 	}
 
 	/*
@@ -73,19 +73,19 @@ public class HuntTheWumpusTest extends Observable {
 	public void testSetWumpus() {
 		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 2)).getBlood());
-		assertTrue(map.getCell(new Point(3, 3)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(2, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(5, 4)).getBlood());
-		assertTrue(map.getCell(new Point(6, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 5)).getBlood());
-		assertTrue(map.getCell(new Point(5, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 2)).isBlood());
+		assertTrue(map.getCell(new Point(3, 3)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(2, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(5, 4)).isBlood());
+		assertTrue(map.getCell(new Point(6, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 5)).isBlood());
+		assertTrue(map.getCell(new Point(5, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 	}
 
 	/*
@@ -95,19 +95,19 @@ public class HuntTheWumpusTest extends Observable {
 	public void testWumpusWraparound() {
 		Model map = new Model();
 		map.setWumpus(new Point(0, 0));
-		assertTrue(map.getCell(new Point(0, 0)).getWumpus());
-		assertTrue(map.getCell(new Point(1, 0)).getBlood());
-		assertTrue(map.getCell(new Point(2, 0)).getBlood());
-		assertTrue(map.getCell(new Point(8, 0)).getBlood());
-		assertTrue(map.getCell(new Point(9, 0)).getBlood());
-		assertTrue(map.getCell(new Point(0, 1)).getBlood());
-		assertTrue(map.getCell(new Point(1, 1)).getBlood());
-		assertTrue(map.getCell(new Point(0, 2)).getBlood());
-		assertTrue(map.getCell(new Point(9, 1)).getBlood());
-		assertTrue(map.getCell(new Point(0, 8)).getBlood());
-		assertTrue(map.getCell(new Point(9, 0)).getBlood());
-		assertTrue(map.getCell(new Point(9, 1)).getBlood());
-		assertTrue(map.getCell(new Point(9, 9)).getBlood());
+		assertTrue(map.getCell(new Point(0, 0)).isWumpus());
+		assertTrue(map.getCell(new Point(1, 0)).isBlood());
+		assertTrue(map.getCell(new Point(2, 0)).isBlood());
+		assertTrue(map.getCell(new Point(8, 0)).isBlood());
+		assertTrue(map.getCell(new Point(9, 0)).isBlood());
+		assertTrue(map.getCell(new Point(0, 1)).isBlood());
+		assertTrue(map.getCell(new Point(1, 1)).isBlood());
+		assertTrue(map.getCell(new Point(0, 2)).isBlood());
+		assertTrue(map.getCell(new Point(9, 1)).isBlood());
+		assertTrue(map.getCell(new Point(0, 8)).isBlood());
+		assertTrue(map.getCell(new Point(9, 0)).isBlood());
+		assertTrue(map.getCell(new Point(9, 1)).isBlood());
+		assertTrue(map.getCell(new Point(9, 9)).isBlood());
 	}
 
 	/*
@@ -122,20 +122,20 @@ public class HuntTheWumpusTest extends Observable {
 	public void testGameAndAllNonLethalStatementsAndPitDeath() {
 		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 2)).getBlood());
-		assertTrue(map.getCell(new Point(3, 3)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(2, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(5, 4)).getBlood());
-		assertTrue(map.getCell(new Point(6, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 5)).getBlood());
-		assertTrue(map.getCell(new Point(5, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 2)).isBlood());
+		assertTrue(map.getCell(new Point(3, 3)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(2, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(5, 4)).isBlood());
+		assertTrue(map.getCell(new Point(6, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 5)).isBlood());
+		assertTrue(map.getCell(new Point(5, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(2, 2));
@@ -143,23 +143,23 @@ public class HuntTheWumpusTest extends Observable {
 		pitPoints.add(new Point(9, 9));
 		map.setPits(pitPoints);
 
-		assertTrue(map.getCell(new Point(2, 2)).getPit());
-		assertTrue(map.getCell(new Point(1, 2)).getSlime());
-		assertTrue(map.getCell(new Point(3, 2)).getSlime());
-		assertTrue(map.getCell(new Point(2, 1)).getSlime());
-		assertTrue(map.getCell(new Point(2, 3)).getSlime());
+		assertTrue(map.getCell(new Point(2, 2)).isPit());
+		assertTrue(map.getCell(new Point(1, 2)).isSlime());
+		assertTrue(map.getCell(new Point(3, 2)).isSlime());
+		assertTrue(map.getCell(new Point(2, 1)).isSlime());
+		assertTrue(map.getCell(new Point(2, 3)).isSlime());
 
-		assertTrue(map.getCell(new Point(5, 5)).getPit());
-		assertTrue(map.getCell(new Point(5, 6)).getSlime());
-		assertTrue(map.getCell(new Point(6, 5)).getSlime());
-		assertTrue(map.getCell(new Point(5, 4)).getGoop());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertTrue(map.getCell(new Point(5, 5)).isPit());
+		assertTrue(map.getCell(new Point(5, 6)).isSlime());
+		assertTrue(map.getCell(new Point(6, 5)).isSlime());
+		assertTrue(map.getCell(new Point(5, 4)).isGoop());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 
-		assertTrue(map.getCell(new Point(9, 9)).getPit());
-		assertTrue(map.getCell(new Point(8, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 8)).getSlime());
-		assertTrue(map.getCell(new Point(0, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 0)).getSlime());
+		assertTrue(map.getCell(new Point(9, 9)).isPit());
+		assertTrue(map.getCell(new Point(8, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 8)).isSlime());
+		assertTrue(map.getCell(new Point(0, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 0)).isSlime());
 
 		map.setHunter(new Point(3, 8));
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -168,7 +168,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -176,7 +176,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('s');
 		assertTrue(map.getHunter().equals(new Point(4, 9)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 9)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 9)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -184,7 +184,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 9)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(3, 9)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 9)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -192,7 +192,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -200,7 +200,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -208,7 +208,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 7)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 7)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 7)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -216,8 +216,8 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 6)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 6)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertFalse(map.getCell(new Point(4, 6)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Your feet slip a bit. You look down and see the floor covered in blood."));
@@ -225,8 +225,8 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 5)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 5)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertFalse(map.getCell(new Point(4, 5)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Eww. You walked onto a reddish green mix of blood and slime. It looks like goop."));
@@ -234,8 +234,8 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('s');
 		assertTrue(map.getHunter().equals(new Point(4, 6)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 6)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertFalse(map.getCell(new Point(4, 6)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Your feet slip a bit. You look down and see the floor covered in blood."));
@@ -243,15 +243,15 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(5, 6)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(5, 6)).getIsEmpty());
-		assertTrue(map.getCell(new Point(5, 6)).getSlime());
+		assertFalse(map.getCell(new Point(5, 6)).isEmpty());
+		assertTrue(map.getCell(new Point(5, 6)).isSlime());
 		assertTrue(map.getCurrentState().equals(
 				"Your shoes are now covered in some sort of slime."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(5, 5)));
-		assertFalse(map.getCell(new Point(5, 5)).getIsEmpty());
-		assertTrue(map.getCell(new Point(5, 5)).getPit());
+		assertFalse(map.getCell(new Point(5, 5)).isEmpty());
+		assertTrue(map.getCell(new Point(5, 5)).isPit());
 		assertTrue(map.getCurrentState().equals(
 				"You loose you footing and fall into a bottemless pit.\n"
 						+ "GAME OVER"));
@@ -270,20 +270,20 @@ public class HuntTheWumpusTest extends Observable {
 	public void testGameWalkIntoWumpusDeath() {
 		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 2)).getBlood());
-		assertTrue(map.getCell(new Point(3, 3)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(2, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(5, 4)).getBlood());
-		assertTrue(map.getCell(new Point(6, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 5)).getBlood());
-		assertTrue(map.getCell(new Point(5, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 2)).isBlood());
+		assertTrue(map.getCell(new Point(3, 3)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(2, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(5, 4)).isBlood());
+		assertTrue(map.getCell(new Point(6, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 5)).isBlood());
+		assertTrue(map.getCell(new Point(5, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(2, 2));
@@ -291,23 +291,23 @@ public class HuntTheWumpusTest extends Observable {
 		pitPoints.add(new Point(9, 9));
 		map.setPits(pitPoints);
 
-		assertTrue(map.getCell(new Point(2, 2)).getPit());
-		assertTrue(map.getCell(new Point(1, 2)).getSlime());
-		assertTrue(map.getCell(new Point(3, 2)).getSlime());
-		assertTrue(map.getCell(new Point(2, 1)).getSlime());
-		assertTrue(map.getCell(new Point(2, 3)).getSlime());
+		assertTrue(map.getCell(new Point(2, 2)).isPit());
+		assertTrue(map.getCell(new Point(1, 2)).isSlime());
+		assertTrue(map.getCell(new Point(3, 2)).isSlime());
+		assertTrue(map.getCell(new Point(2, 1)).isSlime());
+		assertTrue(map.getCell(new Point(2, 3)).isSlime());
 
-		assertTrue(map.getCell(new Point(5, 5)).getPit());
-		assertTrue(map.getCell(new Point(5, 6)).getSlime());
-		assertTrue(map.getCell(new Point(6, 5)).getSlime());
-		assertTrue(map.getCell(new Point(5, 4)).getGoop());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertTrue(map.getCell(new Point(5, 5)).isPit());
+		assertTrue(map.getCell(new Point(5, 6)).isSlime());
+		assertTrue(map.getCell(new Point(6, 5)).isSlime());
+		assertTrue(map.getCell(new Point(5, 4)).isGoop());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 
-		assertTrue(map.getCell(new Point(9, 9)).getPit());
-		assertTrue(map.getCell(new Point(8, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 8)).getSlime());
-		assertTrue(map.getCell(new Point(0, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 0)).getSlime());
+		assertTrue(map.getCell(new Point(9, 9)).isPit());
+		assertTrue(map.getCell(new Point(8, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 8)).isSlime());
+		assertTrue(map.getCell(new Point(0, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 0)).isSlime());
 
 		map.setHunter(new Point(3, 8));
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -316,7 +316,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -324,7 +324,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('s');
 		assertTrue(map.getHunter().equals(new Point(4, 9)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 9)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 9)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -332,7 +332,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 9)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(3, 9)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 9)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -340,7 +340,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -348,7 +348,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -356,7 +356,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 7)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 7)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 7)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -364,8 +364,8 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 6)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 6)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertFalse(map.getCell(new Point(4, 6)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Your feet slip a bit. You look down and see the floor covered in blood."));
@@ -373,16 +373,16 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 5)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 5)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertFalse(map.getCell(new Point(4, 5)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Eww. You walked onto a reddish green mix of blood and slime. It looks like goop."));
 
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 4)));
-		assertFalse(map.getCell(new Point(4, 4)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
+		assertFalse(map.getCell(new Point(4, 4)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
 		assertTrue(map.getCurrentState().equals(
 				"You walk into the wumpus. Dinner is serverd.\n"
 						+ "For the wumpus.\n" + "GAME OVER"));
@@ -401,20 +401,20 @@ public class HuntTheWumpusTest extends Observable {
 	public void testGameShootUpwardsIntoWumpus() {
 		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 2)).getBlood());
-		assertTrue(map.getCell(new Point(3, 3)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(2, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(5, 4)).getBlood());
-		assertTrue(map.getCell(new Point(6, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 5)).getBlood());
-		assertTrue(map.getCell(new Point(5, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 2)).isBlood());
+		assertTrue(map.getCell(new Point(3, 3)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(2, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(5, 4)).isBlood());
+		assertTrue(map.getCell(new Point(6, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 5)).isBlood());
+		assertTrue(map.getCell(new Point(5, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(2, 2));
@@ -422,23 +422,23 @@ public class HuntTheWumpusTest extends Observable {
 		pitPoints.add(new Point(9, 9));
 		map.setPits(pitPoints);
 
-		assertTrue(map.getCell(new Point(2, 2)).getPit());
-		assertTrue(map.getCell(new Point(1, 2)).getSlime());
-		assertTrue(map.getCell(new Point(3, 2)).getSlime());
-		assertTrue(map.getCell(new Point(2, 1)).getSlime());
-		assertTrue(map.getCell(new Point(2, 3)).getSlime());
+		assertTrue(map.getCell(new Point(2, 2)).isPit());
+		assertTrue(map.getCell(new Point(1, 2)).isSlime());
+		assertTrue(map.getCell(new Point(3, 2)).isSlime());
+		assertTrue(map.getCell(new Point(2, 1)).isSlime());
+		assertTrue(map.getCell(new Point(2, 3)).isSlime());
 
-		assertTrue(map.getCell(new Point(5, 5)).getPit());
-		assertTrue(map.getCell(new Point(5, 6)).getSlime());
-		assertTrue(map.getCell(new Point(6, 5)).getSlime());
-		assertTrue(map.getCell(new Point(5, 4)).getGoop());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertTrue(map.getCell(new Point(5, 5)).isPit());
+		assertTrue(map.getCell(new Point(5, 6)).isSlime());
+		assertTrue(map.getCell(new Point(6, 5)).isSlime());
+		assertTrue(map.getCell(new Point(5, 4)).isGoop());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 
-		assertTrue(map.getCell(new Point(9, 9)).getPit());
-		assertTrue(map.getCell(new Point(8, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 8)).getSlime());
-		assertTrue(map.getCell(new Point(0, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 0)).getSlime());
+		assertTrue(map.getCell(new Point(9, 9)).isPit());
+		assertTrue(map.getCell(new Point(8, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 8)).isSlime());
+		assertTrue(map.getCell(new Point(0, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 0)).isSlime());
 
 		map.setHunter(new Point(3, 8));
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -447,7 +447,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -455,7 +455,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('s');
 		assertTrue(map.getHunter().equals(new Point(4, 9)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 9)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 9)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -463,7 +463,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 9)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(3, 9)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 9)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -471,7 +471,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -479,7 +479,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -487,7 +487,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 7)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 7)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 7)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -495,8 +495,8 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 6)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 6)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertFalse(map.getCell(new Point(4, 6)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Your feet slip a bit. You look down and see the floor covered in blood."));
@@ -504,16 +504,16 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 5)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 5)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertFalse(map.getCell(new Point(4, 5)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Eww. You walked onto a reddish green mix of blood and slime. It looks like goop."));
 
 		map.shootArrow('W');
 		assertTrue(map.getHunter().equals(new Point(4, 5)));
-		assertFalse(map.getCell(new Point(4, 5)).getIsEmpty());
-		assertFalse(map.getCell(new Point(4, 5)).getWumpus());
+		assertFalse(map.getCell(new Point(4, 5)).isEmpty());
+		assertFalse(map.getCell(new Point(4, 5)).isWumpus());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You aim and fire you weapon of choice. Your trusty bow.\n"
@@ -534,20 +534,20 @@ public class HuntTheWumpusTest extends Observable {
 	public void testGameShootVerticalIntoWumpusWithArrowWraparound() {
 		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 2)).getBlood());
-		assertTrue(map.getCell(new Point(3, 3)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(2, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(5, 4)).getBlood());
-		assertTrue(map.getCell(new Point(6, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 5)).getBlood());
-		assertTrue(map.getCell(new Point(5, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 2)).isBlood());
+		assertTrue(map.getCell(new Point(3, 3)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(2, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(5, 4)).isBlood());
+		assertTrue(map.getCell(new Point(6, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 5)).isBlood());
+		assertTrue(map.getCell(new Point(5, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(2, 2));
@@ -555,23 +555,23 @@ public class HuntTheWumpusTest extends Observable {
 		pitPoints.add(new Point(9, 9));
 		map.setPits(pitPoints);
 
-		assertTrue(map.getCell(new Point(2, 2)).getPit());
-		assertTrue(map.getCell(new Point(1, 2)).getSlime());
-		assertTrue(map.getCell(new Point(3, 2)).getSlime());
-		assertTrue(map.getCell(new Point(2, 1)).getSlime());
-		assertTrue(map.getCell(new Point(2, 3)).getSlime());
+		assertTrue(map.getCell(new Point(2, 2)).isPit());
+		assertTrue(map.getCell(new Point(1, 2)).isSlime());
+		assertTrue(map.getCell(new Point(3, 2)).isSlime());
+		assertTrue(map.getCell(new Point(2, 1)).isSlime());
+		assertTrue(map.getCell(new Point(2, 3)).isSlime());
 
-		assertTrue(map.getCell(new Point(5, 5)).getPit());
-		assertTrue(map.getCell(new Point(5, 6)).getSlime());
-		assertTrue(map.getCell(new Point(6, 5)).getSlime());
-		assertTrue(map.getCell(new Point(5, 4)).getGoop());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertTrue(map.getCell(new Point(5, 5)).isPit());
+		assertTrue(map.getCell(new Point(5, 6)).isSlime());
+		assertTrue(map.getCell(new Point(6, 5)).isSlime());
+		assertTrue(map.getCell(new Point(5, 4)).isGoop());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 
-		assertTrue(map.getCell(new Point(9, 9)).getPit());
-		assertTrue(map.getCell(new Point(8, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 8)).getSlime());
-		assertTrue(map.getCell(new Point(0, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 0)).getSlime());
+		assertTrue(map.getCell(new Point(9, 9)).isPit());
+		assertTrue(map.getCell(new Point(8, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 8)).isSlime());
+		assertTrue(map.getCell(new Point(0, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 0)).isSlime());
 
 		map.setHunter(new Point(3, 8));
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -580,7 +580,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -588,7 +588,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('s');
 		assertTrue(map.getHunter().equals(new Point(4, 9)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 9)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 9)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -596,7 +596,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 9)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(3, 9)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 9)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -604,7 +604,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -612,7 +612,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -620,7 +620,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 7)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 7)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 7)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -628,8 +628,8 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 6)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 6)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertFalse(map.getCell(new Point(4, 6)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Your feet slip a bit. You look down and see the floor covered in blood."));
@@ -637,16 +637,16 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 5)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 5)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertFalse(map.getCell(new Point(4, 5)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Eww. You walked onto a reddish green mix of blood and slime. It looks like goop."));
 
 		map.shootArrow('S');
 		assertTrue(map.getHunter().equals(new Point(4, 5)));
-		assertFalse(map.getCell(new Point(4, 5)).getIsEmpty());
-		assertFalse(map.getCell(new Point(4, 5)).getWumpus());
+		assertFalse(map.getCell(new Point(4, 5)).isEmpty());
+		assertFalse(map.getCell(new Point(4, 5)).isWumpus());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You aim and fire you weapon of choice. Your trusty bow.\n"
@@ -667,20 +667,20 @@ public class HuntTheWumpusTest extends Observable {
 	public void testGameShootHorizontal() {
 		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 2)).getBlood());
-		assertTrue(map.getCell(new Point(3, 3)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(2, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(5, 4)).getBlood());
-		assertTrue(map.getCell(new Point(6, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 5)).getBlood());
-		assertTrue(map.getCell(new Point(5, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 2)).isBlood());
+		assertTrue(map.getCell(new Point(3, 3)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(2, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(5, 4)).isBlood());
+		assertTrue(map.getCell(new Point(6, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 5)).isBlood());
+		assertTrue(map.getCell(new Point(5, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(2, 2));
@@ -688,23 +688,23 @@ public class HuntTheWumpusTest extends Observable {
 		pitPoints.add(new Point(9, 9));
 		map.setPits(pitPoints);
 
-		assertTrue(map.getCell(new Point(2, 2)).getPit());
-		assertTrue(map.getCell(new Point(1, 2)).getSlime());
-		assertTrue(map.getCell(new Point(3, 2)).getSlime());
-		assertTrue(map.getCell(new Point(2, 1)).getSlime());
-		assertTrue(map.getCell(new Point(2, 3)).getSlime());
+		assertTrue(map.getCell(new Point(2, 2)).isPit());
+		assertTrue(map.getCell(new Point(1, 2)).isSlime());
+		assertTrue(map.getCell(new Point(3, 2)).isSlime());
+		assertTrue(map.getCell(new Point(2, 1)).isSlime());
+		assertTrue(map.getCell(new Point(2, 3)).isSlime());
 
-		assertTrue(map.getCell(new Point(5, 5)).getPit());
-		assertTrue(map.getCell(new Point(5, 6)).getSlime());
-		assertTrue(map.getCell(new Point(6, 5)).getSlime());
-		assertTrue(map.getCell(new Point(5, 4)).getGoop());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertTrue(map.getCell(new Point(5, 5)).isPit());
+		assertTrue(map.getCell(new Point(5, 6)).isSlime());
+		assertTrue(map.getCell(new Point(6, 5)).isSlime());
+		assertTrue(map.getCell(new Point(5, 4)).isGoop());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 
-		assertTrue(map.getCell(new Point(9, 9)).getPit());
-		assertTrue(map.getCell(new Point(8, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 8)).getSlime());
-		assertTrue(map.getCell(new Point(0, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 0)).getSlime());
+		assertTrue(map.getCell(new Point(9, 9)).isPit());
+		assertTrue(map.getCell(new Point(8, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 8)).isSlime());
+		assertTrue(map.getCell(new Point(0, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 0)).isSlime());
 
 		map.setHunter(new Point(3, 8));
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -713,7 +713,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -721,7 +721,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('s');
 		assertTrue(map.getHunter().equals(new Point(4, 9)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 9)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 9)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -729,7 +729,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 9)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(3, 9)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 9)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -737,7 +737,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -745,7 +745,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -753,7 +753,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 7)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 7)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 7)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -761,8 +761,8 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 6)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 6)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertFalse(map.getCell(new Point(4, 6)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Your feet slip a bit. You look down and see the floor covered in blood."));
@@ -770,8 +770,8 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 5)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 5)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertFalse(map.getCell(new Point(4, 5)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Eww. You walked onto a reddish green mix of blood and slime. It looks like goop."));
@@ -779,8 +779,8 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 5)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(3, 5)).getIsEmpty());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
+		assertFalse(map.getCell(new Point(3, 5)).isEmpty());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Your feet slip a bit. You look down and see the floor covered in blood."));
@@ -788,16 +788,16 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 4)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 4)).getIsEmpty());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
+		assertFalse(map.getCell(new Point(4, 4)).isEmpty());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Your feet slip a bit. You look down and see the floor covered in blood."));
 
 		map.shootArrow('D');
 		assertTrue(map.getHunter().equals(new Point(3, 4)));
-		assertFalse(map.getCell(new Point(3, 4)).getIsEmpty());
-		assertFalse(map.getCell(new Point(3, 4)).getWumpus());
+		assertFalse(map.getCell(new Point(3, 4)).isEmpty());
+		assertFalse(map.getCell(new Point(3, 4)).isWumpus());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You aim and fire you weapon of choice. Your trusty bow.\n"
@@ -818,20 +818,20 @@ public class HuntTheWumpusTest extends Observable {
 	public void testGameShootHorizontalWithWrapAround() {
 		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 2)).getBlood());
-		assertTrue(map.getCell(new Point(3, 3)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(2, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(5, 4)).getBlood());
-		assertTrue(map.getCell(new Point(6, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 5)).getBlood());
-		assertTrue(map.getCell(new Point(5, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 2)).isBlood());
+		assertTrue(map.getCell(new Point(3, 3)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(2, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(5, 4)).isBlood());
+		assertTrue(map.getCell(new Point(6, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 5)).isBlood());
+		assertTrue(map.getCell(new Point(5, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(2, 2));
@@ -839,23 +839,23 @@ public class HuntTheWumpusTest extends Observable {
 		pitPoints.add(new Point(9, 9));
 		map.setPits(pitPoints);
 
-		assertTrue(map.getCell(new Point(2, 2)).getPit());
-		assertTrue(map.getCell(new Point(1, 2)).getSlime());
-		assertTrue(map.getCell(new Point(3, 2)).getSlime());
-		assertTrue(map.getCell(new Point(2, 1)).getSlime());
-		assertTrue(map.getCell(new Point(2, 3)).getSlime());
+		assertTrue(map.getCell(new Point(2, 2)).isPit());
+		assertTrue(map.getCell(new Point(1, 2)).isSlime());
+		assertTrue(map.getCell(new Point(3, 2)).isSlime());
+		assertTrue(map.getCell(new Point(2, 1)).isSlime());
+		assertTrue(map.getCell(new Point(2, 3)).isSlime());
 
-		assertTrue(map.getCell(new Point(5, 5)).getPit());
-		assertTrue(map.getCell(new Point(5, 6)).getSlime());
-		assertTrue(map.getCell(new Point(6, 5)).getSlime());
-		assertTrue(map.getCell(new Point(5, 4)).getGoop());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertTrue(map.getCell(new Point(5, 5)).isPit());
+		assertTrue(map.getCell(new Point(5, 6)).isSlime());
+		assertTrue(map.getCell(new Point(6, 5)).isSlime());
+		assertTrue(map.getCell(new Point(5, 4)).isGoop());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 
-		assertTrue(map.getCell(new Point(9, 9)).getPit());
-		assertTrue(map.getCell(new Point(8, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 8)).getSlime());
-		assertTrue(map.getCell(new Point(0, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 0)).getSlime());
+		assertTrue(map.getCell(new Point(9, 9)).isPit());
+		assertTrue(map.getCell(new Point(8, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 8)).isSlime());
+		assertTrue(map.getCell(new Point(0, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 0)).isSlime());
 
 		map.setHunter(new Point(3, 8));
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -864,7 +864,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -872,7 +872,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('s');
 		assertTrue(map.getHunter().equals(new Point(4, 9)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 9)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 9)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -880,7 +880,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 9)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(3, 9)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 9)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -888,7 +888,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -896,7 +896,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('d');
 		assertTrue(map.getHunter().equals(new Point(4, 8)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -904,7 +904,7 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 7)));
 		assertTrue(map.isRunning());
-		assertTrue(map.getCell(new Point(4, 7)).getIsEmpty());
+		assertTrue(map.getCell(new Point(4, 7)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You look around all you see is nothing. The silence is deafaning."));
@@ -912,8 +912,8 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 6)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 6)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertFalse(map.getCell(new Point(4, 6)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Your feet slip a bit. You look down and see the floor covered in blood."));
@@ -921,8 +921,8 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(4, 5)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 5)).getIsEmpty());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertFalse(map.getCell(new Point(4, 5)).isEmpty());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Eww. You walked onto a reddish green mix of blood and slime. It looks like goop."));
@@ -930,8 +930,8 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('a');
 		assertTrue(map.getHunter().equals(new Point(3, 5)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(3, 5)).getIsEmpty());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
+		assertFalse(map.getCell(new Point(3, 5)).isEmpty());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Your feet slip a bit. You look down and see the floor covered in blood."));
@@ -939,16 +939,16 @@ public class HuntTheWumpusTest extends Observable {
 		map.hunterMove('w');
 		assertTrue(map.getHunter().equals(new Point(3, 4)));
 		assertTrue(map.isRunning());
-		assertFalse(map.getCell(new Point(4, 4)).getIsEmpty());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
+		assertFalse(map.getCell(new Point(4, 4)).isEmpty());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
 		assertTrue(map
 				.getCurrentState()
 				.equals("Your feet slip a bit. You look down and see the floor covered in blood."));
 
 		map.shootArrow('A');
 		assertTrue(map.getHunter().equals(new Point(3, 4)));
-		assertFalse(map.getCell(new Point(3, 4)).getIsEmpty());
-		assertFalse(map.getCell(new Point(3, 4)).getWumpus());
+		assertFalse(map.getCell(new Point(3, 4)).isEmpty());
+		assertFalse(map.getCell(new Point(3, 4)).isWumpus());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You aim and fire you weapon of choice. Your trusty bow.\n"
@@ -969,20 +969,20 @@ public class HuntTheWumpusTest extends Observable {
 	public void testGameShootSelfLeftWrap() {
 		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 2)).getBlood());
-		assertTrue(map.getCell(new Point(3, 3)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(2, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(5, 4)).getBlood());
-		assertTrue(map.getCell(new Point(6, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 5)).getBlood());
-		assertTrue(map.getCell(new Point(5, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 2)).isBlood());
+		assertTrue(map.getCell(new Point(3, 3)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(2, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(5, 4)).isBlood());
+		assertTrue(map.getCell(new Point(6, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 5)).isBlood());
+		assertTrue(map.getCell(new Point(5, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(2, 2));
@@ -990,23 +990,23 @@ public class HuntTheWumpusTest extends Observable {
 		pitPoints.add(new Point(9, 9));
 		map.setPits(pitPoints);
 
-		assertTrue(map.getCell(new Point(2, 2)).getPit());
-		assertTrue(map.getCell(new Point(1, 2)).getSlime());
-		assertTrue(map.getCell(new Point(3, 2)).getSlime());
-		assertTrue(map.getCell(new Point(2, 1)).getSlime());
-		assertTrue(map.getCell(new Point(2, 3)).getSlime());
+		assertTrue(map.getCell(new Point(2, 2)).isPit());
+		assertTrue(map.getCell(new Point(1, 2)).isSlime());
+		assertTrue(map.getCell(new Point(3, 2)).isSlime());
+		assertTrue(map.getCell(new Point(2, 1)).isSlime());
+		assertTrue(map.getCell(new Point(2, 3)).isSlime());
 
-		assertTrue(map.getCell(new Point(5, 5)).getPit());
-		assertTrue(map.getCell(new Point(5, 6)).getSlime());
-		assertTrue(map.getCell(new Point(6, 5)).getSlime());
-		assertTrue(map.getCell(new Point(5, 4)).getGoop());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertTrue(map.getCell(new Point(5, 5)).isPit());
+		assertTrue(map.getCell(new Point(5, 6)).isSlime());
+		assertTrue(map.getCell(new Point(6, 5)).isSlime());
+		assertTrue(map.getCell(new Point(5, 4)).isGoop());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 
-		assertTrue(map.getCell(new Point(9, 9)).getPit());
-		assertTrue(map.getCell(new Point(8, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 8)).getSlime());
-		assertTrue(map.getCell(new Point(0, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 0)).getSlime());
+		assertTrue(map.getCell(new Point(9, 9)).isPit());
+		assertTrue(map.getCell(new Point(8, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 8)).isSlime());
+		assertTrue(map.getCell(new Point(0, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 0)).isSlime());
 
 		map.setHunter(new Point(3, 8));
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -1014,7 +1014,7 @@ public class HuntTheWumpusTest extends Observable {
 
 		map.shootArrow('A');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
-		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 8)).isEmpty());
 		assertEquals(
 				map.getCurrentState(),
 				("You aim and fire you weapon of choice. Your trusty bow.\n"
@@ -1037,20 +1037,20 @@ public class HuntTheWumpusTest extends Observable {
 	public void testGameShootSelfRightWrap() {
 		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 2)).getBlood());
-		assertTrue(map.getCell(new Point(3, 3)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(2, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(5, 4)).getBlood());
-		assertTrue(map.getCell(new Point(6, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 5)).getBlood());
-		assertTrue(map.getCell(new Point(5, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 2)).isBlood());
+		assertTrue(map.getCell(new Point(3, 3)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(2, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(5, 4)).isBlood());
+		assertTrue(map.getCell(new Point(6, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 5)).isBlood());
+		assertTrue(map.getCell(new Point(5, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(2, 2));
@@ -1058,23 +1058,23 @@ public class HuntTheWumpusTest extends Observable {
 		pitPoints.add(new Point(9, 9));
 		map.setPits(pitPoints);
 
-		assertTrue(map.getCell(new Point(2, 2)).getPit());
-		assertTrue(map.getCell(new Point(1, 2)).getSlime());
-		assertTrue(map.getCell(new Point(3, 2)).getSlime());
-		assertTrue(map.getCell(new Point(2, 1)).getSlime());
-		assertTrue(map.getCell(new Point(2, 3)).getSlime());
+		assertTrue(map.getCell(new Point(2, 2)).isPit());
+		assertTrue(map.getCell(new Point(1, 2)).isSlime());
+		assertTrue(map.getCell(new Point(3, 2)).isSlime());
+		assertTrue(map.getCell(new Point(2, 1)).isSlime());
+		assertTrue(map.getCell(new Point(2, 3)).isSlime());
 
-		assertTrue(map.getCell(new Point(5, 5)).getPit());
-		assertTrue(map.getCell(new Point(5, 6)).getSlime());
-		assertTrue(map.getCell(new Point(6, 5)).getSlime());
-		assertTrue(map.getCell(new Point(5, 4)).getGoop());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertTrue(map.getCell(new Point(5, 5)).isPit());
+		assertTrue(map.getCell(new Point(5, 6)).isSlime());
+		assertTrue(map.getCell(new Point(6, 5)).isSlime());
+		assertTrue(map.getCell(new Point(5, 4)).isGoop());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 
-		assertTrue(map.getCell(new Point(9, 9)).getPit());
-		assertTrue(map.getCell(new Point(8, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 8)).getSlime());
-		assertTrue(map.getCell(new Point(0, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 0)).getSlime());
+		assertTrue(map.getCell(new Point(9, 9)).isPit());
+		assertTrue(map.getCell(new Point(8, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 8)).isSlime());
+		assertTrue(map.getCell(new Point(0, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 0)).isSlime());
 
 		map.setHunter(new Point(3, 8));
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -1082,7 +1082,7 @@ public class HuntTheWumpusTest extends Observable {
 
 		map.shootArrow('D');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
-		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You aim and fire you weapon of choice. Your trusty bow.\n"
@@ -1105,20 +1105,20 @@ public class HuntTheWumpusTest extends Observable {
 	public void testGameShootUpWrap() {
 		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 2)).getBlood());
-		assertTrue(map.getCell(new Point(3, 3)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(2, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(5, 4)).getBlood());
-		assertTrue(map.getCell(new Point(6, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 5)).getBlood());
-		assertTrue(map.getCell(new Point(5, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 2)).isBlood());
+		assertTrue(map.getCell(new Point(3, 3)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(2, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(5, 4)).isBlood());
+		assertTrue(map.getCell(new Point(6, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 5)).isBlood());
+		assertTrue(map.getCell(new Point(5, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(2, 2));
@@ -1126,23 +1126,23 @@ public class HuntTheWumpusTest extends Observable {
 		pitPoints.add(new Point(9, 9));
 		map.setPits(pitPoints);
 
-		assertTrue(map.getCell(new Point(2, 2)).getPit());
-		assertTrue(map.getCell(new Point(1, 2)).getSlime());
-		assertTrue(map.getCell(new Point(3, 2)).getSlime());
-		assertTrue(map.getCell(new Point(2, 1)).getSlime());
-		assertTrue(map.getCell(new Point(2, 3)).getSlime());
+		assertTrue(map.getCell(new Point(2, 2)).isPit());
+		assertTrue(map.getCell(new Point(1, 2)).isSlime());
+		assertTrue(map.getCell(new Point(3, 2)).isSlime());
+		assertTrue(map.getCell(new Point(2, 1)).isSlime());
+		assertTrue(map.getCell(new Point(2, 3)).isSlime());
 
-		assertTrue(map.getCell(new Point(5, 5)).getPit());
-		assertTrue(map.getCell(new Point(5, 6)).getSlime());
-		assertTrue(map.getCell(new Point(6, 5)).getSlime());
-		assertTrue(map.getCell(new Point(5, 4)).getGoop());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertTrue(map.getCell(new Point(5, 5)).isPit());
+		assertTrue(map.getCell(new Point(5, 6)).isSlime());
+		assertTrue(map.getCell(new Point(6, 5)).isSlime());
+		assertTrue(map.getCell(new Point(5, 4)).isGoop());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 
-		assertTrue(map.getCell(new Point(9, 9)).getPit());
-		assertTrue(map.getCell(new Point(8, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 8)).getSlime());
-		assertTrue(map.getCell(new Point(0, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 0)).getSlime());
+		assertTrue(map.getCell(new Point(9, 9)).isPit());
+		assertTrue(map.getCell(new Point(8, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 8)).isSlime());
+		assertTrue(map.getCell(new Point(0, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 0)).isSlime());
 
 		map.setHunter(new Point(3, 8));
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -1150,7 +1150,7 @@ public class HuntTheWumpusTest extends Observable {
 
 		map.shootArrow('D');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
-		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You aim and fire you weapon of choice. Your trusty bow.\n"
@@ -1173,20 +1173,20 @@ public class HuntTheWumpusTest extends Observable {
 	public void testGameShootSelfDownWrap() {
 		Model map = new Model();
 		map.setWumpus(new Point(4, 4));
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 4)).getWumpus());
-		assertTrue(map.getCell(new Point(4, 2)).getBlood());
-		assertTrue(map.getCell(new Point(3, 3)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(2, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 4)).getBlood());
-		assertTrue(map.getCell(new Point(5, 4)).getBlood());
-		assertTrue(map.getCell(new Point(6, 4)).getBlood());
-		assertTrue(map.getCell(new Point(3, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 5)).getBlood());
-		assertTrue(map.getCell(new Point(5, 5)).getBlood());
-		assertTrue(map.getCell(new Point(4, 6)).getBlood());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 4)).isWumpus());
+		assertTrue(map.getCell(new Point(4, 2)).isBlood());
+		assertTrue(map.getCell(new Point(3, 3)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(2, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 4)).isBlood());
+		assertTrue(map.getCell(new Point(5, 4)).isBlood());
+		assertTrue(map.getCell(new Point(6, 4)).isBlood());
+		assertTrue(map.getCell(new Point(3, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 5)).isBlood());
+		assertTrue(map.getCell(new Point(5, 5)).isBlood());
+		assertTrue(map.getCell(new Point(4, 6)).isBlood());
 
 		ArrayList<Point> pitPoints = new ArrayList<Point>();
 		pitPoints.add(new Point(2, 2));
@@ -1194,23 +1194,23 @@ public class HuntTheWumpusTest extends Observable {
 		pitPoints.add(new Point(9, 9));
 		map.setPits(pitPoints);
 
-		assertTrue(map.getCell(new Point(2, 2)).getPit());
-		assertTrue(map.getCell(new Point(1, 2)).getSlime());
-		assertTrue(map.getCell(new Point(3, 2)).getSlime());
-		assertTrue(map.getCell(new Point(2, 1)).getSlime());
-		assertTrue(map.getCell(new Point(2, 3)).getSlime());
+		assertTrue(map.getCell(new Point(2, 2)).isPit());
+		assertTrue(map.getCell(new Point(1, 2)).isSlime());
+		assertTrue(map.getCell(new Point(3, 2)).isSlime());
+		assertTrue(map.getCell(new Point(2, 1)).isSlime());
+		assertTrue(map.getCell(new Point(2, 3)).isSlime());
 
-		assertTrue(map.getCell(new Point(5, 5)).getPit());
-		assertTrue(map.getCell(new Point(5, 6)).getSlime());
-		assertTrue(map.getCell(new Point(6, 5)).getSlime());
-		assertTrue(map.getCell(new Point(5, 4)).getGoop());
-		assertTrue(map.getCell(new Point(4, 5)).getGoop());
+		assertTrue(map.getCell(new Point(5, 5)).isPit());
+		assertTrue(map.getCell(new Point(5, 6)).isSlime());
+		assertTrue(map.getCell(new Point(6, 5)).isSlime());
+		assertTrue(map.getCell(new Point(5, 4)).isGoop());
+		assertTrue(map.getCell(new Point(4, 5)).isGoop());
 
-		assertTrue(map.getCell(new Point(9, 9)).getPit());
-		assertTrue(map.getCell(new Point(8, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 8)).getSlime());
-		assertTrue(map.getCell(new Point(0, 9)).getSlime());
-		assertTrue(map.getCell(new Point(9, 0)).getSlime());
+		assertTrue(map.getCell(new Point(9, 9)).isPit());
+		assertTrue(map.getCell(new Point(8, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 8)).isSlime());
+		assertTrue(map.getCell(new Point(0, 9)).isSlime());
+		assertTrue(map.getCell(new Point(9, 0)).isSlime());
 
 		map.setHunter(new Point(3, 8));
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
@@ -1218,7 +1218,7 @@ public class HuntTheWumpusTest extends Observable {
 
 		map.shootArrow('S');
 		assertTrue(map.getHunter().equals(new Point(3, 8)));
-		assertTrue(map.getCell(new Point(3, 8)).getIsEmpty());
+		assertTrue(map.getCell(new Point(3, 8)).isEmpty());
 		assertTrue(map
 				.getCurrentState()
 				.equals("You aim and fire you weapon of choice. Your trusty bow.\n"

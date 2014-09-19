@@ -1,5 +1,6 @@
 /*
  * @ - Author: Abhishek Rane
+
  * @ - Author: Bryce Hammond
  */
 
@@ -25,56 +26,56 @@ public class Cell {
 	/*
 	 * Getter for hidden room.
 	 */
-	public boolean getHiddenRoom() {
+	public boolean isHiddenRoom() {
 		return hiddenRoom;
 	}
 	
 	/*
 	 * Getter for slime.
 	 */
-	public boolean getSlime() {
+	public boolean isSlime() {
 		return slime;
 	}
 	
 	/*
 	 * Getter for blood.
 	 */
-	public boolean getBlood() {
+	public boolean isBlood() {
 		return blood;
 	}
 	
 	/*
 	 * Getter for pit.
 	 */
-	public boolean getPit() {
+	public boolean isPit() {
 		return pit;
 	}
 	
 	/*
 	 * Checks if the room is empty.
 	 */
-	public boolean getIsEmpty() {
+	public boolean isEmpty() {
 		return !slime && !blood && !pit && !wumpus;
 	}
 	
 	/*
 	 * Checks if the room has a wumpus.
 	 */
-	public boolean getWumpus() {
+	public boolean isWumpus() {
 		return wumpus;
 	}
 	
 	/*
 	 * Checks if the room has goop.
 	 */
-	public boolean getGoop() {
+	public boolean isGoop() {
 		return slime && blood;
 	}
 
 	/*
 	 * Checks if the room has a hunter
 	 */
-	public boolean getHunter() {
+	public boolean isHunter() {
 		return hunter;
 	}
 	

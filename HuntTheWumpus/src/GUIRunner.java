@@ -1,15 +1,26 @@
+/*
+ * @ - Author: Abhishek Rane
+
+ * @ - Author: Bryce Hammond
+ */
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-
+/*
+ *  Entry point for GUI version of the game. Holds all objects and 
+ *  visual elements.
+ */
 public class GUIRunner extends JFrame {
 	private Model gameModel;
 	private MoveButtonPanel moveButtons;
@@ -20,6 +31,9 @@ public class GUIRunner extends JFrame {
 	private PictureVersionPanel picturePanel = new PictureVersionPanel();
 	private JButton resetButton = new JButton();
 
+	/*
+	 * Constructs JFram, JTabbedPanel, and links the views to the model.
+	 */
 	public GUIRunner() {
 		this.gameModel = new Model();
 		this.gameModel.startNewGame();
@@ -62,16 +76,21 @@ public class GUIRunner extends JFrame {
 		this.gameModel.forceUpdate();
 	}
 
-
+	/*
+	 * Allows user to restart the game.
+	 */
 	private class resetButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			gameModel.startNewGame();
 			gameModel.forceUpdate();
+			picturePanel.reset();
 		}
 	}
 
+	/*
+	 * Entry point for App.
+	 */
 	public static void main(String[] args) {
 		new GUIRunner();
 	}
-
 }

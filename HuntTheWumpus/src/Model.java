@@ -38,12 +38,17 @@ public class Model extends Observable {
 		this.running = true;
 		this.hunterLocation = null;
 	}
-	
+	/*
+	 *  Forces the Observers to update themselves
+	 */
 	public void forceUpdate(){
 		this.setChanged();
 		this.notifyObservers();
 	}
 
+	/*
+	 *  Starts a new game board.
+	 */
 	public void startNewGame() {
 		map = new Cell[10][10];
 		for (int i = 0; i < 10; i++) {
@@ -64,16 +69,13 @@ public class Model extends Observable {
 		generateHunter();
 	}
 	
+	/*
+	 *  List of visible rooms. For easy GUI drawing
+	 */
 	public ArrayList<Point> getVisibleRooms(){
 		return this.visiblePoints;
 	}
 	
-	public void toStringVis(){
-		for (Point p : visiblePoints){
-			System.out.println(p);
-		}
-	}
-
 	/*
 	 * Returns a cell of the map given a point.
 	 */
@@ -223,8 +225,8 @@ public class Model extends Observable {
 		while (!hunterPlaced) {
 			int i = rand.nextInt(map.length);
 			int j = rand.nextInt(map.length);
-			if (!map[i][j].getWumpus() && !map[i][j].getPit()
-					&& !map[i][j].getSlime() && !map[i][j].getBlood()) {
+			if (!map[i][j].isWumpus() && !map[i][j].isPit()
+					&& !map[i][j].isSlime() && !map[i][j].isBlood()) {
 				this.hunterLocation = (new Point(j, i));
 				map[i][j].setHiddenRoom(false);
 				map[i][j].setHunter(true);
@@ -328,15 +330,16 @@ public class Model extends Observable {
 		return running;
 	}
 
-	// update comment
 	/*
-	 * Gets a textual representation for every room that the hunter is in. If
-	 * and end game condition has been reached, the game ends.
+	 * Gets a textual representation for current room that the hunter is in.
 	 */
 	public String getCurrentState() {
 		return this.currentState;
 	}
 	
+	/*
+	 *  Sets all rooms to visible. Ends run loop.
+	 */
 	private void endGame(){
 		running = false;
 		this.visiblePoints.clear();
@@ -347,10 +350,25 @@ public class Model extends Observable {
 		}
 	}
 	
+	/*
+	 *  Getter for hunter shooting him self.
+	 */
 	public boolean hasHitSelf(){
 		return this.hitSelf;
 	}
 	
+	/*
+	 * Getter for the hunter shooting the wumpus.
+	 */
+	public boolean hasHitWumpus(){
+		return this.hitWumpus;
+	}
+	
+	/*
+	 *  Main game logic.
+	 *  Checks if game needs to be ended.
+	 *  Produces the state of the current room the hunter is in.
+	 */
 	private void updateCurrentState() {
 		if (hitWumpus) {
 			endGame();
@@ -364,21 +382,21 @@ public class Model extends Observable {
 					+ "As you are about to turn away a portal appears infront of the arrow. The arrow enters the portal.\n"
 					+ "You hear a sound behind you. Somehow another portal has opened up behind you. The arrow is flying towards you.\n"
 					+ "The arrow hits you in the ending your carrer as an explorer. Unable to walk and loosing blood you die alone.";
-		} else if (getCell(hunterLocation).getGoop()) {
+		} else if (getCell(hunterLocation).isGoop()) {
 			this.currentState = "Eww. You walked onto a reddish green mix of blood and slime. It looks like goop.";
-		} else if (getCell(hunterLocation).getBlood()) {
+		} else if (getCell(hunterLocation).isBlood()) {
 			this.currentState = "Your feet slip a bit. You look down and see the floor covered in blood.";
-		} else if (getCell(hunterLocation).getSlime()) {
+		} else if (getCell(hunterLocation).isSlime()) {
 			this.currentState = "Your shoes are now covered in some sort of slime.";
-		} else if (getCell(hunterLocation).getPit()) {
+		} else if (getCell(hunterLocation).isPit()) {
 			endGame();
 			this.currentState = "You loose you footing and fall into a bottemless pit.\n"
 					+ "GAME OVER";
-		} else if (getCell(hunterLocation).getWumpus()) {
+		} else if (getCell(hunterLocation).isWumpus()) {
 			endGame();
 			this.currentState = "You walk into the wumpus. Dinner is serverd.\n"
 					+ "For the wumpus.\n" + "GAME OVER";
-		} else if (getCell(hunterLocation).getIsEmpty()) {
+		} else if (getCell(hunterLocation).isEmpty()) {
 			this.currentState = "You look around all you see is nothing. The silence is deafaning.";
 		} else {
 			this.currentState = "";
@@ -397,17 +415,17 @@ public class Model extends Observable {
 			for (int j = 0; j < 10; j++) {
 				if (i == hunterLocation.y && j == hunterLocation.x) {
 					toString += " [O]";
-				} else if (map[i][j].getHiddenRoom()) {
+				} else if (map[i][j].isHiddenRoom()) {
 					toString += " [X]";
-				} else if (map[i][j].getPit()) {
+				} else if (map[i][j].isPit()) {
 					toString += " [P]";
-				} else if (map[i][j].getWumpus()) {
+				} else if (map[i][j].isWumpus()) {
 					toString += " [W]";
-				} else if (map[i][j].getGoop()) {
+				} else if (map[i][j].isGoop()) {
 					toString += " [G]";
-				} else if (map[i][j].getBlood()) {
+				} else if (map[i][j].isBlood()) {
 					toString += " [B]";
-				} else if (map[i][j].getSlime()) {
+				} else if (map[i][j].isSlime()) {
 					toString += " [S]";
 				} else {
 					toString += " [ ]";
@@ -431,15 +449,15 @@ public class Model extends Observable {
 			for (int j = 0; j < 10; j++) {
 				if (i == hunterLocation.y && j == hunterLocation.x) {
 					toString += " [O]";
-				} else if (map[i][j].getPit()) {
+				} else if (map[i][j].isPit()) {
 					toString += " [P]";
-				} else if (map[i][j].getWumpus()) {
+				} else if (map[i][j].isWumpus()) {
 					toString += " [W]";
-				} else if (map[i][j].getGoop()) {
+				} else if (map[i][j].isGoop()) {
 					toString += " [G]";
-				} else if (map[i][j].getBlood()) {
+				} else if (map[i][j].isBlood()) {
 					toString += " [B]";
-				} else if (map[i][j].getSlime()) {
+				} else if (map[i][j].isSlime()) {
 					toString += " [S]";
 				} else {
 					toString += " [ ]";
